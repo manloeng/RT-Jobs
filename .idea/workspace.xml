@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e21ea376-a589-4abe-9c24-5cc824bbf1d2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/firestore.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/firestore.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/templates/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/templates/signup.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,11 +16,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backend/firestore.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="710">
-              <caret line="59" column="17" lean-forward="true" selection-start-line="59" selection-start-column="17" selection-end-line="59" selection-end-column="17" />
+            <state relative-caret-position="280">
+              <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/templates/signup.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="26" column="7" lean-forward="true" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -41,7 +49,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/backend/secret.py" />
-        <option value="$PROJECT_DIR$/backend/templates/signup.html" />
         <option value="$PROJECT_DIR$/backend/controller/userAuth-controller.py" />
         <option value="$PROJECT_DIR$/backend/controller/userAuthController.py" />
         <option value="$PROJECT_DIR$/backend/app.py" />
@@ -51,6 +58,7 @@
         <option value="$PROJECT_DIR$/backend/server.py" />
         <option value="$PROJECT_DIR$/backend/__init__.py" />
         <option value="$PROJECT_DIR$/backend/templates/login.html" />
+        <option value="$PROJECT_DIR$/backend/templates/signup.html" />
         <option value="$PROJECT_DIR$/backend/firestore.py" />
       </list>
     </option>
@@ -150,13 +158,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/backend/templates/signup.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="21" lean-forward="true" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/controller/userAuthController.py" />
     <entry file="file://$PROJECT_DIR$/backend/.env">
       <provider selected="true" editor-type-id="text-editor">
@@ -241,10 +242,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/backend/templates/signup.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="7" lean-forward="true" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/backend/firestore.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="710">
-          <caret line="59" column="17" lean-forward="true" selection-start-line="59" selection-start-column="17" selection-end-line="59" selection-end-column="17" />
+        <state relative-caret-position="280">
+          <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>

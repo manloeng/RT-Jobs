@@ -65,28 +65,35 @@ def verify(id_token):
 def userprofile():
     return render_template('loggedIn.html')
 
-# Admin SDK - creating users and adding users
+# Admin SDK - setting up for admin privileges
 cred = credentials.Certificate("firebase-private-key.json")
 default_app = firebase_admin.initialize_app(cred)
-print(default_app)
+# print(default_app)
 db = firestore.client()
 
 
-# need routing to add data into the database
-doc_ref = db.collection(u'users').document(u'alovelace')
-doc_ref.set({
-    u'first': u'Ada',
-    u'last': u'Lovelace',
-    u'born': 1815
-})
+# adds user
+@app.route('/user/signup', methods=['GET', 'POST'])
+def usersignup():
+    # need to use dynamic information from the frontend submission
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        try:
+            user = auth.create_user(
+                email=email,
+                password=password,
+                # display_name='John Doe',
+            )
+        except:
+            # should try print firebase error
+            return jsonify({'messsage': "error"})
+    return render_template('signup.html')
 
-doc_ref = db.collection(u'users').document(u'aturing')
-doc_ref.set({
-    u'first': u'Alan',
-    u'middle': u'Mathison',
-    u'last': u'Turing',
-    u'born': 1912
-})
+    # user = auth.create_user(
+    #     uid='some-uid', email='user@example.com', phone_number='+15555550100')
+    # print('Sucessfully created new user: {0}'.format(user.uid))
+
 
 # fetches data from db with a where clause
 @app.route('/', methods=['GET'])
@@ -97,24 +104,6 @@ def user_data():
     for doc in docs:
         print(u'{} => {}'.format(doc.id, doc.to_dict()))
         return jsonify(doc.id, doc.to_dict())
-
-
-# need to create the signup using this
-# add user
-# user = auth.create_user(
-#     email='user@example.com',
-#     email_verified=False,
-#     phone_number='+15555550100',
-#     password='secretPassword',
-#     display_name='John Doe',
-#     photo_url='http://www.example.com/12345678/photo.png',
-#     disabled=False)
-# print('Sucessfully created new user: {0}'.format(user.uid))
-#
-#
-# user = auth.create_user(
-#     uid='some-uid', email='user@example.com', phone_number='+15555550100')
-# print('Sucessfully created new user: {0}'.format(user.uid))
 
 
 # update user info
@@ -135,14 +124,14 @@ def user_data():
 # print('Successfully deleted user')
 
 
-# list all users
+# list all users that has registered in our database
 # Start listing users from the beginning, 1000 at a time.
-page = auth.list_users()
-while page:
-    for user in page.users:
-        print('User: ' + user.uid)
-    # Get next batch of users.
-    page = page.get_next_page()
+# page = auth.list_users()
+# while page:
+#     for user in page.users:
+#         print('User: ' + user.uid)
+#     # Get next batch of users.
+#     page = page.get_next_page()
 
 # Iterate through all users. This will still retrieve users in batches,
 # buffering no more than 1000 users in memory at a time.
@@ -150,3 +139,20 @@ while page:
 #     print('User: ' + user.uid)
 
 
+# adding data into database
+
+# need routing to add data into the database
+# doc_ref = db.collection(u'users').document(u'alovelace')
+# doc_ref.set({
+#     u'first': u'Ada',
+#     u'last': u'Lovelace',
+#     u'born': 1815
+# })
+#
+# doc_ref = db.collection(u'users').document(u'aturing')
+# doc_ref.set({
+#     u'first': u'Alan',
+#     u'middle': u'Mathison',
+#     u'last': u'Turing',
+#     u'born': 1912
+# })
