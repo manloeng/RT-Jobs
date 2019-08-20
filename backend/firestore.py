@@ -41,13 +41,17 @@ def login():
 def verify(id_token):
     # print(id_token)
     decoded_token = auth.verify_id_token(id_token)
-    print(decoded_token)
+    # print(decoded_token)
     uid = decoded_token['uid']
     print(uid)
-
+    # returns : AqXgtr4pxrNmGn2QFkT6Z5FxpLZ2 (exmaples)
     # checking the user info by uid
-    # # user = auth.get_user(uid)
-    # # print('Successfully fetched user data: {0}'.format(user.uid))
+    user = auth.get_user(uid)
+    print(user, "<------")
+    # returns <firebase_admin._user_mgt.UserRecord object at 0x103ab7fd0> <------
+    print('Successfully fetched user data: {0}'.format(user.uid))
+    # returns : Successfully fetched user data: AqXgtr4pxrNmGn2QFkT6Z5FxpLZ2
+    # unique id (uid) should be stored in the frontend after successful login
 
     # checking via email?
     # email = "manloengchung@googlemail.com"
@@ -57,16 +61,11 @@ def verify(id_token):
     # print('Successfully fetched user data: {0}'.format(user.uid))
 
 
-@app.route('/user/login', methods=['GET', 'POST'])
-def user():
-    email = request.form['email']
-    password = request.form['password']
-    auth.create_user_with_email_and_password(email, password)
+@app.route('/user/profile', methods=['GET', 'POST'])
+def userprofile():
     return render_template('loggedIn.html')
 
-
 # Admin SDK - creating users and adding users
-
 cred = credentials.Certificate("firebase-private-key.json")
 default_app = firebase_admin.initialize_app(cred)
 print(default_app)
@@ -89,7 +88,7 @@ doc_ref.set({
     u'born': 1912
 })
 
-
+# fetches data from db with a where clause
 @app.route('/', methods=['GET'])
 def user_data():
     users_ref = db.collection(u'users').where(u'first', u'==', 'Ada')
@@ -116,6 +115,7 @@ def user_data():
 # user = auth.create_user(
 #     uid='some-uid', email='user@example.com', phone_number='+15555550100')
 # print('Sucessfully created new user: {0}'.format(user.uid))
+
 
 # update user info
 # user = auth.update_user(
