@@ -53,13 +53,6 @@ def verify(id_token):
     # returns : Successfully fetched user data: AqXgtr4pxrNmGn2QFkT6Z5FxpLZ2
     # unique id (uid) should be stored in the frontend after successful login
 
-    # checking via email?
-    # email = "manloengchung@googlemail.com"
-    # user = auth.get_user_by_email(email)
-    # print("hello")
-    # print(user)
-    # print('Successfully fetched user data: {0}'.format(user.uid))
-
 
 @app.route('/user/profile', methods=['GET', 'POST'])
 def userprofile():
@@ -95,10 +88,6 @@ def usersignup():
             return jsonify({'messsage': "error"})
     return render_template('signup.html')
 
-    # user = auth.create_user(
-    #     uid='some-uid', email='user@example.com', phone_number='+15555550100')
-    # print('Sucessfully created new user: {0}'.format(user.uid))
-
 
 # fetches data from db with a where clause
 @app.route('/', methods=['GET'])
@@ -109,47 +98,3 @@ def user_data():
     for doc in docs:
         print(u'{} => {}'.format(doc.id, doc.to_dict()))
         return jsonify(doc.id, doc.to_dict())
-
-
-# update user info
-# user = auth.update_user(
-#     uid,
-#     email='user@example.com',
-#     phone_number='+15555550100',
-#     email_verified=True,
-#     password='newPassword',
-#     display_name='John Doe',
-#     photo_url='http://www.example.com/12345678/photo.png',
-#     disabled=True)
-# print('Sucessfully updated user: {0}'.format(user.uid))
-
-
-# #  delete user
-# auth.delete_user(uid)
-# print('Successfully deleted user')
-
-
-# list all users that has registered in our database
-# Start listing users from the beginning, 1000 at a time.
-# page = auth.list_users()
-# while page:
-#     for user in page.users:
-#         print('User: ' + user.uid)
-#     # Get next batch of users.
-#     page = page.get_next_page()
-
-# Iterate through all users. This will still retrieve users in batches,
-# buffering no more than 1000 users in memory at a time.
-# for user in auth.list_users().iterate_all():
-#     print('User: ' + user.uid)
-
-
-# adding data into database
-
-# doc_ref = db.collection(u'users').document(u'aturing')
-# doc_ref.set({
-#     u'first': u'Alan',
-#     u'middle': u'Mathison',
-#     u'last': u'Turing',
-#     u'born': 1912
-# })
