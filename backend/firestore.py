@@ -32,6 +32,8 @@ def login():
         id_token = checkauth['idToken']
         # verifies users - id token
         verify(id_token)
+    #     need to add some sort of routing here!!!
+    #     after verifiying idtoken do something!!!!
     # renders a html template
     return render_template('login.html')
 
@@ -43,6 +45,18 @@ def verify(id_token):
     uid = decoded_token['uid']
     print(uid)
 
+    # checking the user info by uid
+    # # user = auth.get_user(uid)
+    # # print('Successfully fetched user data: {0}'.format(user.uid))
+
+    # checking via email?
+    # email = "manloengchung@googlemail.com"
+    # user = auth.get_user_by_email(email)
+    # print("hello")
+    # print(user)
+    # print('Successfully fetched user data: {0}'.format(user.uid))
+
+
 @app.route('/user/login', methods=['GET', 'POST'])
 def user():
     email = request.form['email']
@@ -52,11 +66,14 @@ def user():
 
 
 # Admin SDK - creating users and adding users
+
 cred = credentials.Certificate("firebase-private-key.json")
 default_app = firebase_admin.initialize_app(cred)
 print(default_app)
 db = firestore.client()
 
+
+# need routing to add data into the database
 doc_ref = db.collection(u'users').document(u'alovelace')
 doc_ref.set({
     u'first': u'Ada',
@@ -83,17 +100,7 @@ def user_data():
         return jsonify(doc.id, doc.to_dict())
 
 
-# Auth here - testing
-# # user = auth.get_user(uid)
-# # print('Successfully fetched user data: {0}'.format(user.uid))
-
-
-# email = "manloengchung@googlemail.com"
-# user = auth.get_user_by_email(email)
-# print("hello")
-# print(user)
-# print('Successfully fetched user data: {0}'.format(user.uid))
-
+# need to create the signup using this
 # add user
 # user = auth.create_user(
 #     email='user@example.com',
@@ -110,7 +117,7 @@ def user_data():
 #     uid='some-uid', email='user@example.com', phone_number='+15555550100')
 # print('Sucessfully created new user: {0}'.format(user.uid))
 
-# update user
+# update user info
 # user = auth.update_user(
 #     uid,
 #     email='user@example.com',
@@ -121,15 +128,14 @@ def user_data():
 #     photo_url='http://www.example.com/12345678/photo.png',
 #     disabled=True)
 # print('Sucessfully updated user: {0}'.format(user.uid))
-#
+
+
 # #  delete user
-#
 # auth.delete_user(uid)
 # print('Successfully deleted user')
 
 
 # list all users
-
 # Start listing users from the beginning, 1000 at a time.
 page = auth.list_users()
 while page:
