@@ -34,7 +34,7 @@ def login():
         verify(id_token)
     #     need to add some sort of routing here!!!
     #     after verifiying idtoken do something!!!!
-    # renders a html template
+    #     renders a html template
     return render_template('login.html')
 
 
@@ -47,7 +47,7 @@ def verify(id_token):
     # returns : AqXgtr4pxrNmGn2QFkT6Z5FxpLZ2 (exmaples)
     # checking the user info by uid
     user = auth.get_user(uid)
-    print(user, "<------")
+    # print(user, "<------")
     # returns <firebase_admin._user_mgt.UserRecord object at 0x103ab7fd0> <------
     print('Successfully fetched user data: {0}'.format(user.uid))
     # returns : Successfully fetched user data: AqXgtr4pxrNmGn2QFkT6Z5FxpLZ2
@@ -56,6 +56,9 @@ def verify(id_token):
 
 @app.route('/user/profile', methods=['GET', 'POST'])
 def userprofile():
+    email= "manloengchung@googlemail.com"
+    user = auth.get_user_by_email(email)
+    print('Successfully fetched user data: {0}'.format(user.uid))
     return render_template('loggedIn.html')
 
 # Admin SDK - setting up for admin privileges
@@ -79,12 +82,17 @@ def usersignup():
                 password=password,
                 # display_name='John Doe',
             )
-            # adds data into our data when user signs up
-            # needs to be more dynamic
-            doc_ref = db.collection(u'users').document()
+            print("check starting")
+            # then logs in
+            checkauth = pyreAuth.sign_in_with_email_and_password(email, password)
+            print(checkauth, "<-----")
+            localId = checkauth['localId']
+            # adds data into our data when user signs up and set up its own user obj
+            # needs to be more accept a range of data
+            doc_ref = db.collection(u'users').document(localId)
             doc_ref.set({u'email': email})
         except:
-            # should try print firebase error
+            # should print firebase error
             return jsonify({'messsage': "error"})
     return render_template('signup.html')
 
