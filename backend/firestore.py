@@ -80,11 +80,16 @@ def usersignup():
         email = request.form['email']
         password = request.form['password']
         try:
+            # creates a new user in firebase (under the hood)
             user = auth.create_user(
                 email=email,
                 password=password,
                 # display_name='John Doe',
             )
+            # adds data into our data when user signs up
+            # needs to be more dynamic
+            doc_ref = db.collection(u'users').document()
+            doc_ref.set({u'email': email})
         except:
             # should try print firebase error
             return jsonify({'messsage': "error"})
@@ -141,14 +146,6 @@ def user_data():
 
 # adding data into database
 
-# need routing to add data into the database
-# doc_ref = db.collection(u'users').document(u'alovelace')
-# doc_ref.set({
-#     u'first': u'Ada',
-#     u'last': u'Lovelace',
-#     u'born': 1815
-# })
-#
 # doc_ref = db.collection(u'users').document(u'aturing')
 # doc_ref.set({
 #     u'first': u'Alan',
