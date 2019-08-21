@@ -97,6 +97,35 @@ def usersignup():
     return render_template('signup.html')
 
 
+# adding business
+@app.route('/business/signup', methods=['GET', 'POST'])
+def businesssignup():
+    # need to use dynamic information from the frontend submission
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        name = request.form['name']
+        try:
+            # creates a new user in firebase (under the hood)
+            user = auth.create_user(
+                email=email,
+                password=password,
+                display_name=name,
+            )
+            # then logs in
+            checkauth = pyreAuth.sign_in_with_email_and_password(email, password)
+            # print(checkauth, "<-----")
+            localId = checkauth['localId']
+            # adds data into our data when user signs up and set up its own user obj
+            # needs to be more accept a range of data
+            doc_ref = db.collection(u'business').document(localId)
+            doc_ref.set({u'email': email, u'name': name})
+        except:
+            # should print firebase error
+            return jsonify({'messsage': "error"})
+    return render_template('businessSignup.html')
+
+
 # fetches data from db with a where clause
 @app.route('/', methods=['GET'])
 def user_data():
