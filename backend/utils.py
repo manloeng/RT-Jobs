@@ -31,7 +31,7 @@ with open('db/testData/users.json') as users:
     usersArrData = json.load(users)
     for usersData in usersArrData:
         # print(usersData)
-        doc_ref = db.collection(u’users’).document()
+        doc_ref = db.collection(u'users').document()
         doc_ref.set(usersData)
 
 
@@ -39,7 +39,7 @@ with open('db/testData/business.json') as business:
     businessArrData = json.load(business)
     for businessData in businessArrData:
         # print(businessData)
-        doc_ref = db.collection(u’business’).document()
+        doc_ref = db.collection(u'business').document()
         doc_ref.set(businessData)
 
 
@@ -47,5 +47,5 @@ with open('db/testData/jobDescription.json') as jobDescription:
     jobDescriptionArr = json.load(jobDescription)
     for jobDescription in jobDescriptionArr:
         # print(jobDescription)
-        doc_ref = db.collection(u’jobDescription’).document()
+        doc_ref = db.collection(u'jobDescription').document()
         doc_ref.set(jobDescription)
