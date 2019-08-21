@@ -30,36 +30,61 @@ def login():
         password = request.form['password']
         checkauth = pyreAuth.sign_in_with_email_and_password(email, password)
         id_token = checkauth['idToken']
-        # verifies users - id token
         verify(id_token)
-    #     need to add some sort of routing here!!!
-    #     after verifiying idtoken do something!!!!
-    #     renders a html template
+        if verify(id_token) == "user":
+            return redirect('/user/profile')
     return render_template('login.html')
 
 
+@app.route('/business/login', methods=['GET', 'POST'])
+def businesslogin():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        checkauth = pyreAuth.sign_in_with_email_and_password(email, password)
+        id_token = checkauth['idToken']
+        verify(id_token)
+        if verify(id_token) == "business":
+            return redirect('/business/profile')
+    return render_template('businessLogin.html')
+
+
+
 def verify(id_token):
-    # print(id_token)
     decoded_token = auth.verify_id_token(id_token)
-    # print(decoded_token)
     uid = decoded_token['uid']
     print(uid)
-    # returns : AqXgtr4pxrNmGn2QFkT6Z5FxpLZ2 (exmaples)
-    # checking the user info by uid
-    user = auth.get_user(uid)
-    # print(user, "<------")
-    # returns <firebase_admin._user_mgt.UserRecord object at 0x103ab7fd0> <------
-    print('Successfully fetched user data: {0}'.format(user.uid))
-    # returns : Successfully fetched user data: AqXgtr4pxrNmGn2QFkT6Z5FxpLZ2
-    # unique id (uid) should be stored in the frontend after successful login
+    # check if user/ business
+    users_ref = db.collection(u'users')
+    userData = users_ref.stream()
+    for user in userData:
+        if uid in user.id:
+            print('user logged in')
+            return "user"
+
+    business_ref = db.collection(u'business')
+    businessData = business_ref.stream()
+    for business in businessData:
+        if uid in business.id:
+            print('business logged in')
+            return "business"
 
 
 @app.route('/user/profile', methods=['GET', 'POST'])
 def userprofile():
     email= "manloengchung@googlemail.com"
     user = auth.get_user_by_email(email)
-    print('Successfully fetched user data: {0}'.format(user.uid))
+    # print('Successfully fetched user data: {0}'.format(user.uid))
     return render_template('loggedIn.html')
+
+
+@app.route('/business/profile', methods=['GET', 'POST'])
+def businessprofile():
+    email= "manloengchung@googlemail.com"
+    user = auth.get_user_by_email(email)
+    # print('Successfully fetched user data: {0}'.format(user.uid))
+    return render_template('loggedIn.html')
+
 
 # Admin SDK - setting up for admin privileges
 cred = credentials.Certificate("firebase-private-key.json")
