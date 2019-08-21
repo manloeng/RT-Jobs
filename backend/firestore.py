@@ -3,7 +3,7 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 from firebase_admin import auth
 from flask import *
-import pyrebase
+from pyrebase import pyrebase
 import secret
 
 
@@ -49,7 +49,6 @@ def businesslogin():
     return render_template('businessLogin.html')
 
 
-
 def verify(id_token):
     decoded_token = auth.verify_id_token(id_token)
     uid = decoded_token['uid']
@@ -72,7 +71,7 @@ def verify(id_token):
 
 @app.route('/user/profile', methods=['GET', 'POST'])
 def userprofile():
-    email= "manloengchung@googlemail.com"
+    email = "manloengchung@googlemail.com"
     user = auth.get_user_by_email(email)
     # print('Successfully fetched user data: {0}'.format(user.uid))
     return render_template('loggedIn.html')
@@ -80,7 +79,7 @@ def userprofile():
 
 @app.route('/business/profile', methods=['GET', 'POST'])
 def businessprofile():
-    email= "manloengchung@googlemail.com"
+    email = "manloengchung@googlemail.com"
     user = auth.get_user_by_email(email)
     # print('Successfully fetched user data: {0}'.format(user.uid))
     return render_template('loggedIn.html')
@@ -109,13 +108,15 @@ def usersignup():
                 # display_name='John Doe',
             )
             # then logs in
-            checkauth = pyreAuth.sign_in_with_email_and_password(email, password)
+            checkauth = pyreAuth.sign_in_with_email_and_password(
+                email, password)
             # print(checkauth, "<-----")
             localId = checkauth['localId']
             # adds data into our data when user signs up and set up its own user obj
             # needs to be more accept a range of data
             doc_ref = db.collection(u'users').document(localId)
-            doc_ref.set({u'email': email, u'name': '', u'avatar_url': 'https://placekitten.com/474/821'})
+            doc_ref.set({u'email': email, u'name': '',
+                         u'avatar_url': 'https://placekitten.com/474/821'})
         except:
             # should print firebase error
             return jsonify({'messsage': "error"})
@@ -138,7 +139,8 @@ def businesssignup():
                 display_name=name,
             )
             # then logs in
-            checkauth = pyreAuth.sign_in_with_email_and_password(email, password)
+            checkauth = pyreAuth.sign_in_with_email_and_password(
+                email, password)
             # print(checkauth, "<-----")
             localId = checkauth['localId']
             # adds data into our data when user signs up and set up its own user obj
