@@ -27,7 +27,7 @@ delete_collection(db.collection(u'business'), 100)
 delete_collection(db.collection(u'jobDescription'), 100)
 
 
-with open(‘db/testData/users.json’) as users:
+with open('db/testData/users.json') as users:
     usersArrData = json.load(users)
     for usersData in usersArrData:
         # print(usersData)
@@ -35,7 +35,7 @@ with open(‘db/testData/users.json’) as users:
         doc_ref.set(usersData)
 
 
-with open(‘db/testData/business.json’) as business:
+with open('db/testData/business.json') as business:
     businessArrData = json.load(business)
     for businessData in businessArrData:
         # print(businessData)
@@ -43,7 +43,7 @@ with open(‘db/testData/business.json’) as business:
         doc_ref.set(businessData)
 
 
-with open(‘db/testData/jobDescription.json’) as jobDescription:
+with open('db/testData/jobDescription.json') as jobDescription:
     jobDescriptionArr = json.load(jobDescription)
     for jobDescription in jobDescriptionArr:
         # print(jobDescription)
