@@ -9,7 +9,9 @@
   "dependencies": {
     "react": "16.8.3",
     "react-native": "0.59.4",
-    "react-native-webrtc": "^1.75.0"
+    "react-native-gesture-handler": "^1.4.0",
+    "react-native-webrtc": "^1.75.0",
+    "react-navigation": "^3.11.1"
   },
   "devDependencies": {
     "@babel/core": "7.5.5",
