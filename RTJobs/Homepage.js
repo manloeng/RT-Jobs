@@ -1,5 +1,16 @@
 import React from "react";
-import { Text, Button, View } from "react-native";
+import { StyleSheet, Text, Button, View } from "react-native";
+
+const styles = StyleSheet.create({
+  baseText: {
+    fontFamily: "Roboto"
+  },
+  title: {
+    fontSize: 30,
+    fontWeight: "bold",
+    alignItems: "center"
+  }
+});
 
 class Homepage extends React.Component {
   static navigationOptions = {
@@ -9,18 +20,18 @@ class Homepage extends React.Component {
     // const { navigate } = this.props.navigation;
     return (
       <View>
-        <Text>RT Jobs</Text>
-        <View>
+        <Text style={styles.title}>RT Jobs</Text>
+        <View style={{ width: 100, height: 35, alignContent: "flex-end" }}>
           <Button
-            title="Yes"
+            title="Business"
             onPress={() => {
               console.log("clicked");
             }}
           />
         </View>
-        <View>
+        <View style={{ width: 100, height: 35, alignContent: "flex-end" }}>
           <Button
-            title="No"
+            title="Applicant"
             onPress={() => {
               console.log("clicked");
             }}
@@ -30,4 +41,5 @@ class Homepage extends React.Component {
     );
   }
 }
+
 export default Homepage;
