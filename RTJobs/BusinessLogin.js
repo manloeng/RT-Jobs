@@ -6,6 +6,7 @@ class BusinessLogin extends React.Component {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text>Business Login</Text>
+        <Text>Name</Text>
       </View>
     );
   }
