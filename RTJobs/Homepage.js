@@ -17,7 +17,7 @@ class Homepage extends React.Component {
     title: "RT Jobs"
   };
   render() {
-    // const { navigate } = this.props.navigation;
+    const { navigate } = this.props.navigation;
     return (
       <View>
         <Text style={styles.title}>RT Jobs</Text>
@@ -25,17 +25,13 @@ class Homepage extends React.Component {
         <View style={{ width: 100, height: 35, alignContent: "flex-end" }}>
           <Button
             title="Business"
-            onPress={() => {
-              console.log("clicked");
-            }}
+            onPress={() => navigate("BusinessLogin", { name: "Business" })}
           />
         </View>
         <View style={{ width: 100, height: 35, alignContent: "flex-end" }}>
           <Button
             title="Applicant"
-            onPress={() => {
-              console.log("clicked");
-            }}
+            onPress={() => navigate("ApplicantLogin", { name: "Applicant" })}
           />
         </View>
       </View>
