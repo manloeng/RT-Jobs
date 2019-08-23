@@ -14,13 +14,14 @@ const styles = StyleSheet.create({
 
 class Homepage extends React.Component {
   static navigationOptions = {
-    title: "Welcome"
+    title: "RT Jobs"
   };
   render() {
     // const { navigate } = this.props.navigation;
     return (
       <View>
         <Text style={styles.title}>RT Jobs</Text>
+        <Text>I am a:</Text>
         <View style={{ width: 100, height: 35, alignContent: "flex-end" }}>
           <Button
             title="Business"
