@@ -19,7 +19,7 @@ class Homepage extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text style={styles.title}>RT Jobs</Text>
         <Text>I am a:</Text>
         <View style={{ width: 100, height: 35, alignContent: "flex-end" }}>
