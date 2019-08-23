@@ -6,6 +6,7 @@ class ApplicantLogin extends React.Component {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text>Applicant Login</Text>
+        <Text>Name</Text>
       </View>
     );
   }
