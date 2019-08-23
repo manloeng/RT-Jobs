@@ -1,7 +1,7 @@
 import React from "react";
-import { Text, View, Button } from "react-native";
+import { Text, View } from "react-native";
 
-class ApplicantLogin extends React.Component {
+class ApplicantSignUp extends React.Component {
   static navigationOptions = {
     title: "RT Jobs"
   };
@@ -9,13 +9,10 @@ class ApplicantLogin extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Button
-          title="SignUp"
-          onPress={() => navigate("ApplicantSignUp", { name: "SignUp" })}
-        />
+        <Text>Applicant SignUp</Text>
       </View>
     );
   }
 }
 
-export default ApplicantLogin;
+export default ApplicantSignUp;
