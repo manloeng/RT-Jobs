@@ -3,6 +3,7 @@ import Homepage from "./Homepage";
 import BusinessLogin from "./BusinessLogin";
 import ApplicantLogin from "./ApplicantLogin";
 import ApplicantSignUp from "./ApplicantSignUp";
+import BusinessSignup from "./BusinessSignup";
 
 const MainNavigator = createStackNavigator({
   Home: { screen: Homepage },
