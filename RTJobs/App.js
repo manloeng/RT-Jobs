@@ -8,7 +8,8 @@ const MainNavigator = createStackNavigator({
   Home: { screen: Homepage },
   BusinessLogin: { screen: BusinessLogin },
   ApplicantLogin: { screen: ApplicantLogin },
-  ApplicantSignUp: { screen: ApplicantSignUp }
+  ApplicantSignUp: { screen: ApplicantSignUp },
+  BusinessSignup: { screen: BusinessSignup }
 });
 
 const App = createAppContainer(MainNavigator);
