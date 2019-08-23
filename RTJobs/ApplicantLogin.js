@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, View, Button } from "react-native";
+import { TextInput } from "react-native-gesture-handler";
 
 class ApplicantLogin extends React.Component {
   static navigationOptions = {
@@ -10,9 +11,19 @@ class ApplicantLogin extends React.Component {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Button
-          title="SignUp"
-          onPress={() => navigate("ApplicantSignUp", { name: "SignUp" })}
+          title="Sign Up"
+          onPress={() => navigate("ApplicantSignUp", { name: "Sign Up" })}
         />
+        <Text style={{ fontSize: 20 }}>Applicant Login</Text>
+        <TextInput placeholder="Email Address" />
+        <TextInput
+          placeholder="Password"
+          secureTextEntry={true}
+          password={true}
+        />
+        <View>
+          <Button onPress={this.props.onLoginPress} title="Login" />
+        </View>
       </View>
     );
   }
