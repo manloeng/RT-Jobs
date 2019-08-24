@@ -1,8 +1,8 @@
 package com.rtjobs;
 
 import android.app.Application;
-import com.oney.WebRTCModule.WebRTCModulePackage;
 import com.facebook.react.ReactApplication;
+import com.opentokreactnative.OTPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -19,13 +19,14 @@ public class MainApplication extends Application implements ReactApplication {
     public boolean getUseDeveloperSupport() {
       return BuildConfig.DEBUG;
     }
+    
 
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNGestureHandlerPackage(),
-          new WebRTCModulePackage()  
+            new OTPackage(),
+            new RNGestureHandlerPackage()  
       );
     }
 
@@ -35,6 +36,7 @@ public class MainApplication extends Application implements ReactApplication {
     }
   };
 
+  
   @Override
   public ReactNativeHost getReactNativeHost() {
     return mReactNativeHost;
@@ -45,4 +47,5 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
   }
+
 }

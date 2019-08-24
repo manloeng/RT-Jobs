@@ -34,6 +34,12 @@ class Homepage extends React.Component {
             onPress={() => navigate("ApplicantLogin", { name: "Applicant" })}
           />
         </View>
+        <View style={{ width: 100, height: 35, alignContent: "flex-end" }}>
+          <Button
+            title="Test"
+            onPress={() => navigate("VideoCallTest", { name: "Test" })}
+          />
+        </View>
       </View>
     );
   }
