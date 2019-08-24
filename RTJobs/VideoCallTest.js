@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { OTSession, OTPublisher, OTSubscriber } from 'opentok-react-native';
+import apiKey from './opentokConfig';
 
 
 class VideoCallTest extends Component {
   state = {
-    apiKey: null,
+    apiKey,
     sessionId: null,
     token: null
   }
@@ -24,8 +25,8 @@ class VideoCallTest extends Component {
   componentDidMount() {
     fetch("https://rt-jobs-room-server.herokuapp.com/")
       .then(response => response.json())
-      .then(({sessionId, token, apiKey}) => {
-        this.setState({sessionId, token, apiKey})
+      .then(({sessionId, token}) => {
+        this.setState({sessionId, token})
       })
       .catch(error => console.log(error))
   }
