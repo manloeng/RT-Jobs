@@ -36,8 +36,14 @@ class Homepage extends React.Component {
         </View>
         <View style={{ width: 100, height: 35, alignContent: "flex-end" }}>
           <Button
-            title="Test"
-            onPress={() => navigate("VideoCallTest", { name: "Test" })}
+            title="VidTest"
+            onPress={() => navigate("VideoCallTest", { name: "VidTest" })}
+          />
+        </View>
+        <View style={{ width: 100, height: 35, alignContent: "flex-end" }}>
+          <Button
+            title="ChatTest"
+            onPress={() => navigate("ChatTest", { name: "ChatTest" })}
           />
         </View>
       </View>
