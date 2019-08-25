@@ -9,8 +9,7 @@ const styles = StyleSheet.create({
     fontSize: 50,
     fontWeight: "bold",
     alignItems: "center",
-    color: "#4c4f4f",
-    fontFamily: "monospace"
+    color: "#4c4f4f"
   },
   button: {
     alignItems: "center",
