@@ -4,13 +4,15 @@ import BusinessLogin from "./BusinessLogin";
 import ApplicantLogin from "./ApplicantLogin";
 import ApplicantSignUp from "./ApplicantSignUp";
 import BusinessSignup from "./BusinessSignup";
+import ApplicantAvailableJobs from "./ApplicantAvailableJobs";
 
 const MainNavigator = createStackNavigator({
   Home: { screen: Homepage },
   BusinessLogin: { screen: BusinessLogin },
   ApplicantLogin: { screen: ApplicantLogin },
   ApplicantSignUp: { screen: ApplicantSignUp },
-  BusinessSignup: { screen: BusinessSignup }
+  BusinessSignup: { screen: BusinessSignup },
+  ApplicantAvailableJobs: { screen: ApplicantAvailableJobs }
 });
 
 const App = createAppContainer(MainNavigator);

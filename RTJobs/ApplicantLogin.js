@@ -22,7 +22,14 @@ class ApplicantLogin extends React.Component {
           password={true}
         />
         <View>
-          <Button onPress={this.props.onLoginPress} title="Login" />
+          <Button
+            title="Login"
+            onPress={() =>
+              navigate("ApplicantAvailableJobs", {
+                name: "ApplicantAvailableJobs"
+              })
+            }
+          />
         </View>
       </View>
     );
