@@ -26,6 +26,7 @@ export default class ChatTest extends Component {
           const messages = event.connectionId === myConnectionId ? [...oldMessages, { data: `Me: ${event.data}` }] : [...oldMessages, { data: `Other: ${event.data}` }];
           this.setState({
             messages,
+            signal: {data: '', type: ''}
           });
         }
       },
@@ -48,6 +49,7 @@ export default class ChatTest extends Component {
   );
   render() {
     const { apiKey, sessionId, token, video } = this.state;
+    console.log(this.state.text);
     if (!sessionId || !token) return <Text>umm text chat might pop up?</Text>
     return (
       <View style={{ flex: 1 }}>
