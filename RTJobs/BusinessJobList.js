@@ -7,9 +7,18 @@ class BusinessJobList extends React.Component {
     title: "RT Jobs"
   };
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text style={{ fontSize: 20 }}>List of jobs go here</Text>
+        <Button
+          title="Post"
+          onPress={() =>
+            navigate("BusinessPostJob", { name: "BusinessPostJob" })
+          }
+        />
+        <View>
+          <Text style={{ fontSize: 20 }}>List of jobs go here</Text>
+        </View>
       </View>
     );
   }
