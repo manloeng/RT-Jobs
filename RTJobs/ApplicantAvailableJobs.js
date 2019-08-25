@@ -11,6 +11,14 @@ class ApplicantAvailableJobs extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Button
+          title="Your jobs"
+          onPress={() =>
+            navigate("ApplicantJobsApplied", {
+              name: "ApplicantJobsApplied"
+            })
+          }
+        />
         <Text style={{ fontSize: 20 }}>
           List of jobs an applicant can apply for goes here
         </Text>
