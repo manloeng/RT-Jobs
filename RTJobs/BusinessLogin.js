@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, Button, View, ScrollView } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
+
 class BusinessLogin extends React.Component {
   static navigationOptions = {
     title: "RT Jobs"
@@ -19,7 +20,12 @@ class BusinessLogin extends React.Component {
             password={true}
           />
           <View style={{ margin: 7 }} />
-          <Button title="Login" />
+          <Button
+            title="Login"
+            onPress={() =>
+              navigate("BusinessJobList", { name: "BusinessJobList" })
+            }
+          />
           <Button
             onPress={() =>
               navigate("BusinessSignup", { name: "BusinessSignup" })
