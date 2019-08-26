@@ -36,7 +36,7 @@ class Homepage extends React.Component {
         </View>
         <View style={{ width: 100, height: 35, alignContent: "flex-end" }}>
           <Button
-            title="Chat"
+            title="Chat-u"
             onPress={() => navigate("JoinedChat", { name: "Chat" })}
           />
         </View>

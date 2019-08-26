@@ -3,13 +3,14 @@ import { View, Button, TextInput, StyleSheet, FlatList, Text } from 'react-nativ
 import { OTSession, OTPublisher, OTSubscriber } from 'opentok-react-native';
 import apiKey from './opentokConfig';
 
+const OTSessionId = "2_MX40NjQwOTQzMn5-MTU2NjgxMDkwNzk3NH42Q2RqWm9BL3hNSHoxOG1Ma1hMeC9rWlB-UH4";
+
 export default class ChatTest extends Component {
   constructor(props) {
     super(props);
     this.state = {
       video: false,
       apiKey,
-      sessionId: null,
       token: null,
       signal: {
         data: '',
@@ -26,7 +27,7 @@ export default class ChatTest extends Component {
           const messages = event.connectionId === myConnectionId ? [...oldMessages, { data: `Me: ${event.data}` }] : [...oldMessages, { data: `Other: ${event.data}` }];
           this.setState({
             messages,
-            signal: {data: '', type: ''}
+            signal: { data: '', type: '' }
           });
         }
       },
@@ -43,22 +44,22 @@ export default class ChatTest extends Component {
       });
     }
   }
-  _keyExtractor = (item, index) => index;
+  _keyExtractor = (item, index) => index.toString();
   _renderItem = ({ item }) => (
     <Text style={styles.item}>{item.data}</Text>
   );
   render() {
-    const { apiKey, sessionId, token, video } = this.state;
-    console.log(this.state.text);
-    if (!sessionId || !token) return <Text>umm text chat might pop up?</Text>
+    const { apiKey, token, video, } = this.state;
+    if (!token) return <Text>umm text chat might pop up?</Text>
     return (
       <View style={{ flex: 1 }}>
+        <Button onPress={() => {this.endchat()}} title="End Chat"/>
         <Button onPress={() => { this.setState(currState => ({ video: !currState.video })) }} title={`switch to ${video ? 'chat' : 'video'}`} />
         {
           video
             ? (
               <View style={{ flex: 1, flexDirection: 'row' }}>
-                <OTSession apiKey={apiKey} sessionId={"2_MX40NjQwOTQzMn5-MTU2Njc0MDM5OTgzMn5ibUR1cHBtN0t6Y21Ra2ZjQjFvUHJGNHd-UH4"} token={"T1==cGFydG5lcl9pZD00NjQwOTQzMiZzaWc9NjNkZDg0ZmNhZjVjMGEzYWQ4MzdlMzEzYTA3ZjUzMGMzNDE0YjdkNDpzZXNzaW9uX2lkPTJfTVg0ME5qUXdPVFF6TW41LU1UVTJOamMwTURNNU9UZ3pNbjVpYlVSMWNIQnROMHQ2WTIxUmEyWmpRakZ2VUhKR05IZC1VSDQmY3JlYXRlX3RpbWU9MTU2Njc0MDQwMCZub25jZT0wLjEzNzM5MDA1MjE5NzA2MzAyJnJvbGU9cHVibGlzaGVyJmV4cGlyZV90aW1lPTE1NjY4MjY4MDAmaW5pdGlhbF9sYXlvdXRfY2xhc3NfbGlzdD0="}>
+                <OTSession apiKey={apiKey} sessionId={OTSessionId} token={token}>
                   <OTPublisher style={{ width: 100, height: 100 }} />
                   <OTSubscriber style={{ width: 100, height: 100 }} />
                 </OTSession>
@@ -68,8 +69,8 @@ export default class ChatTest extends Component {
               <View>
                 <OTSession
                   apiKey={apiKey}
-                  sessionId={"2_MX40NjQwOTQzMn5-MTU2Njc0MDM5OTgzMn5ibUR1cHBtN0t6Y21Ra2ZjQjFvUHJGNHd-UH4"}
-                  token={"T1==cGFydG5lcl9pZD00NjQwOTQzMiZzaWc9NjNkZDg0ZmNhZjVjMGEzYWQ4MzdlMzEzYTA3ZjUzMGMzNDE0YjdkNDpzZXNzaW9uX2lkPTJfTVg0ME5qUXdPVFF6TW41LU1UVTJOamMwTURNNU9UZ3pNbjVpYlVSMWNIQnROMHQ2WTIxUmEyWmpRakZ2VUhKR05IZC1VSDQmY3JlYXRlX3RpbWU9MTU2Njc0MDQwMCZub25jZT0wLjEzNzM5MDA1MjE5NzA2MzAyJnJvbGU9cHVibGlzaGVyJmV4cGlyZV90aW1lPTE1NjY4MjY4MDAmaW5pdGlhbF9sYXlvdXRfY2xhc3NfbGlzdD0="}
+                  sessionId={OTSessionId}
+                  token={token}
                   signal={this.state.signal}
                   eventHandlers={this.sessionEventHandlers}
                   ref={(instance) => {
@@ -97,12 +98,19 @@ export default class ChatTest extends Component {
     );
   }
   componentDidMount() {
-    fetch("https://rt-jobs-room-server.herokuapp.com/")
+    this.getToken(OTSessionId);
+  }
+
+  getToken = (sessionId) => {
+    fetch(`https://rt-jobs-room-server.herokuapp.com/token/${sessionId}`)
       .then(response => response.json())
-      .then(({ sessionId, token }) => {
-        this.setState({ sessionId, token })
+      .then(({ token }) => {
+        this.setState({ token })
       })
-      .catch(error => console.log(error))
+  }
+  async endchat() {
+    await this.setState({token: null});
+    this.props.navigation.goBack();
   }
 }
 
