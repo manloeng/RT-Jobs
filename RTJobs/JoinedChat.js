@@ -53,7 +53,6 @@ export default class ChatTest extends Component {
     if (!token) return <Text>umm text chat might pop up?</Text>
     return (
       <View style={{ flex: 1 }}>
-        <Button onPress={() => {this.endchat()}} title="End Chat"/>
         <Button onPress={() => { this.setState(currState => ({ video: !currState.video })) }} title={`switch to ${video ? 'chat' : 'video'}`} />
         {
           video
@@ -107,10 +106,6 @@ export default class ChatTest extends Component {
       .then(({ token }) => {
         this.setState({ token })
       })
-  }
-  async endchat() {
-    await this.setState({token: null});
-    this.props.navigation.goBack();
   }
 }
 
