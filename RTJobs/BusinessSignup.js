@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, Button, View, ScrollView } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
+import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import * as api from "./api";
 
 class BusinessSignup extends React.Component {
@@ -42,15 +42,16 @@ class BusinessSignup extends React.Component {
             password={true}
           />
           <View style={{ margin: 7 }} />
-          <Button
+          <TouchableOpacity
             onChange={this.handleTextChange}
             type="submit"
             value="Submit"
-            title="Sign Up"
             onPress={e => {
               this.handleSubmit(e);
             }}
-          />
+          >
+            <Text>Sign Up</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );

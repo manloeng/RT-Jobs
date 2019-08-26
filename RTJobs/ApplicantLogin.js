@@ -1,12 +1,19 @@
 import React from "react";
-import { StyleSheet, Text, Button, View, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  Button,
+  View,
+  ScrollView,
+  TouchableOpacity
+} from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import * as api from "./api";
 
 class ApplicantLogin extends React.Component {
   state = {
-    email: "",
-    password: ""
+    email: "applicant@test.co.uk",
+    password: "password"
   };
 
   static navigationOptions = {
@@ -34,29 +41,36 @@ class ApplicantLogin extends React.Component {
             password={true}
           />
           <View style={{ margin: 7 }} />
-          <Button
-            onPress={e => {
+          <TouchableOpacity
+            onPress={(e, navigate) => {
               this.handleSubmit(e, navigate);
             }}
-            title="Login"
-          />
-          <Button
+          >
+            <Text>Login</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
             onPress={() =>
               navigate("ApplicantSignup", { name: "ApplicantSignup" })
             }
-            title="Sign Up"
-          />
+          >
+            <Text>Sign Up</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );
   }
-  handleSubmit = (e, navigate) => {
+  handleSubmit = e => {
     const { email, password } = this.state;
     e.preventDefault();
     api
       .loginApplicant({ email, password })
-      .then(({ email, localId }) => {
-        navigate("ApplicantLogin", { email, localId });
+      .then(({ display_name, email, localId }) => {
+        if (localId)
+          this.props.navigation.navigate("ApplicantAvailableJobs", {
+            display_name,
+            email,
+            localId
+          });
       })
       .catch(e => console.log(e));
   };

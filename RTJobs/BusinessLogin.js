@@ -1,12 +1,19 @@
 import React from "react";
-import { StyleSheet, Text, Button, View, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  Button,
+  View,
+  ScrollView,
+  TouchableOpacity
+} from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import * as api from "./api";
 
 class BusinessLogin extends React.Component {
   state = {
-    email: "",
-    password: ""
+    email: "business@test.co.uk",
+    password: "password"
   };
 
   static navigationOptions = {
@@ -14,7 +21,6 @@ class BusinessLogin extends React.Component {
   };
 
   render() {
-   
     const { navigate } = this.props.navigation;
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -35,18 +41,20 @@ class BusinessLogin extends React.Component {
             password={true}
           />
           <View style={{ margin: 7 }} />
-          <Button
+          <TouchableOpacity
             onPress={e => {
               this.handleSubmit(e);
             }}
-            title="Login"
-          />
-          <Button
+          >
+            <Text>Login</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
             onPress={() =>
               navigate("BusinessSignup", { name: "BusinessSignup" })
             }
-            title="Sign Up"
-          />
+          >
+            <Text>Sign Up</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );
