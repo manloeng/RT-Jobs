@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, Text, Button, View, ScrollView } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import * as api from "./api";
-// import console = require("console");
 
 class BusinessSignup extends React.Component {
   state = {
@@ -15,29 +14,23 @@ class BusinessSignup extends React.Component {
   };
 
   render() {
-    const { navigate } = this.props.navigation;
-
-    console.log(this.state.password);
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text style={{ fontSize: 20 }}>Business Sign Up</Text>
         <View>
           <TextInput
-            onChange={this.handleTextChange}
+            onChange={e => {
+              this.handleTextChange(e, "display_name");
+            }}
             placeholder="Business Name"
             name="display_name"
           />
           <TextInput
-            onChange={this.handleTextChange}
+            onChange={e => {
+              this.handleTextChange(e, "email");
+            }}
             placeholder="Email Address"
             name="email"
-            onSubmit={() => {
-              if (this.state.email !== "") {
-                ("Email Not Valid");
-              } else {
-                (".......");
-              }
-            }}
           />
           <TextInput
             onChange={e => {
@@ -50,13 +43,11 @@ class BusinessSignup extends React.Component {
           />
           <View style={{ margin: 7 }} />
           <Button
-            // onSubmit={this.handleSubmit}
             onChange={this.handleTextChange}
             type="submit"
             value="Submit"
             title="Sign Up"
             onPress={e => {
-              console.log("on press");
               this.handleSubmit(e);
             }}
           />
@@ -66,13 +57,11 @@ class BusinessSignup extends React.Component {
   }
 
   handleSubmit = e => {
-    console.log("in submit");
     const { display_name, email, password } = this.state;
     e.preventDefault();
     api
       .postBusiness({ display_name, email, password })
       .then(({ display_name, email, localId }) => {
-        console.log(display_name, email, localId);
         navigate("BusinessLogin", { display_name, email, localId });
       })
       .catch(e => console.log(e));
