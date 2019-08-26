@@ -13,19 +13,28 @@ export const postBusiness = async ({ display_name, email, password }) => {
     email,
     password
   });
-  console.log(business);
   return business;
 };
 
 export const loginBusiness = async ({ email, password }) => {
   const loginBusinessLink = "/business/login";
-  console.log(email, password);
   const {
     data: { business }
   } = await request.post(loginBusinessLink, {
     email,
     password
   });
-  console.log(business);
   return business;
+};
+
+export const postApplicant = async ({ display_name, email, password }) => {
+  const postedUserLink = "/user/signup";
+  const {
+    data: { user }
+  } = await request.post(postedUserLink, {
+    display_name,
+    email,
+    password
+  });
+  return user;
 };

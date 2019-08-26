@@ -14,9 +14,7 @@ class BusinessLogin extends React.Component {
   };
 
   render() {
-    console.log(this.state.email);
-    console.log(this.state.password);
-
+   
     const { navigate } = this.props.navigation;
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -59,7 +57,6 @@ class BusinessLogin extends React.Component {
     api
       .loginBusiness({ email, password })
       .then(({ email, localId }) => {
-        console.log(email, localId);
         navigate("BusinessLogin", { email, localId });
       })
       .catch(e => console.log(e));
