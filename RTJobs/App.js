@@ -6,6 +6,9 @@ import ApplicantSignUp from "./ApplicantSignUp";
 import BusinessSignup from "./BusinessSignup";
 import BusinessJobList from "./BusinessJobList";
 import BusinessPostJob from "./BusinessPostJob";
+import ApplicantAvailableJobs from "./ApplicantAvailableJobs";
+import ApplicantJobsApplied from "./ApplicantJobsApplied";
+
 
 const MainNavigator = createStackNavigator({
   Home: { screen: Homepage },
@@ -14,7 +17,9 @@ const MainNavigator = createStackNavigator({
   ApplicantSignUp: { screen: ApplicantSignUp },
   BusinessSignup: { screen: BusinessSignup },
   BusinessJobList: { screen: BusinessJobList },
-  BusinessPostJob: { screen: BusinessPostJob }
+  BusinessPostJob: { screen: BusinessPostJob },
+  ApplicantAvailableJobs: { screen: ApplicantAvailableJobs },
+  ApplicantJobsApplied: { screen: ApplicantJobsApplied }
 });
 
 const App = createAppContainer(MainNavigator);
