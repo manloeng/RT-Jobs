@@ -38,3 +38,15 @@ export const postApplicant = async ({ display_name, email, password }) => {
   });
   return user;
 };
+
+export const loginApplicant = async ({ email, password }) => {
+  const loginUserLink = "/user/login";
+  const {
+    data: { user }
+  } = await request.post(loginUserLink, {
+    email,
+    password
+  });
+  console.log(user);
+  return user;
+};
