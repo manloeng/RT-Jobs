@@ -50,3 +50,12 @@ export const loginApplicant = async ({ email, password }) => {
   console.log(user);
   return user;
 };
+
+export const getJobs = async () => {
+  const getJobsLink = "/jobs";
+  const {
+    data: { jobs }
+  } = await request.get(getJobsLink);
+  console.log(jobs);
+  return jobs;
+};

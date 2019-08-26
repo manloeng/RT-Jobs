@@ -9,7 +9,6 @@ import BusinessPostJob from "./BusinessPostJob";
 import ApplicantAvailableJobs from "./ApplicantAvailableJobs";
 import ApplicantJobsApplied from "./ApplicantJobsApplied";
 
-
 const MainNavigator = createStackNavigator({
   Home: { screen: Homepage },
   BusinessLogin: { screen: BusinessLogin },

@@ -1,15 +1,36 @@
 import React from "react";
 import { Text, Button, View, TouchableOpacity } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
+import { TextInput, FlatList } from "react-native-gesture-handler";
+import * as api from "./api";
+import JobCard from "./JobCard";
+
 class ApplicantAvailableJobs extends React.Component {
+  state = { jobs: null, isLoading: true };
+
   static navigationOptions = {
     title: "RT Jobs"
   };
 
   render() {
     const { navigate } = this.props.navigation;
+    const { jobs, isLoading } = this.state;
+    if (isLoading)
+      return (
+        <View>
+          <Text>Loading...</Text>
+        </View>
+      );
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <TouchableOpacity
+          onPress={() =>
+            navigate("ApplicantAvailableJobs", {
+              name: "ApplicantAvailableJobs"
+            })
+          }
+        >
+          <Text>Jobs</Text>
+        </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
             navigate("ApplicantJobsApplied", {
@@ -17,13 +38,28 @@ class ApplicantAvailableJobs extends React.Component {
             })
           }
         >
-          <Text>Your Jobs</Text>
+          <Text>Applied</Text>
         </TouchableOpacity>
-        <Text style={{ fontSize: 20 }}>
-          List of jobs an applicant can apply for goes here
-        </Text>
+        <View>
+          {jobs.map(job => {
+            return <JobCard {...job}></JobCard>;
+          })}
+        </View>
       </View>
     );
   }
+
+  componentDidMount() {
+    this.fetchJobs();
+  }
+
+  fetchJobs = () => {
+    api
+      .getJobs()
+      .then(jobs => {
+        this.setState({ jobs, isLoading: false });
+      })
+      .catch(e => console.log(e));
+  };
 }
 export default ApplicantAvailableJobs;
