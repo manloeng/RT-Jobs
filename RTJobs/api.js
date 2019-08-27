@@ -47,7 +47,6 @@ export const loginApplicant = async ({ email, password }) => {
     email,
     password
   });
-  console.log(user);
   return user;
 };
 
@@ -95,3 +94,20 @@ export const postBusinessApproval = async (app_id, res) => {
   console.log(application, "app");
   return application;
 };
+
+export const getJobs = async () => {
+  const getJobsLink = "/jobs";
+  const {
+    data: { jobs }
+  } = await request.get(getJobsLink);
+  return jobs;
+};
+
+export const getApplications = async localId => {
+  const getApplicationsLink = `/applications?user_id=${localId}`;
+  const {
+    data: { applications }
+  } = await request.get(getApplicationsLink);
+  return applications;
+};
+
