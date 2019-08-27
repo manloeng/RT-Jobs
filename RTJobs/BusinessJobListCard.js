@@ -22,6 +22,7 @@ class BusinessJobListCard extends React.Component {
       duration,
       description
     } = this.props;
+    // console.log(this.props, "here!");
     return (
       <ScrollView>
         <View>
@@ -38,8 +39,9 @@ class BusinessJobListCard extends React.Component {
           <View>
             <TouchableOpacity
               onPress={() =>
-                this.props.navigation("BusinessJobApplicants", {
-                  name: "BusinessJobApplicants"
+                this.props.navigation.navigate("BusinessApplicantList", {
+                  job_id: this.props.job_id,
+                  name: "BusinessApplicantList"
                 })
               }
             >

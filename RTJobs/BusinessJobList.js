@@ -20,7 +20,7 @@ class BusinessJobList extends React.Component {
   };
   render() {
     const { businessJobList } = this.state;
-    const { navigate } = this.props.navigation;
+
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <TouchableOpacity
@@ -35,7 +35,11 @@ class BusinessJobList extends React.Component {
         </TouchableOpacity>
         <ScrollView>
           {businessJobList.map(job => {
-            return <BusinessJobListCard {...job}> </BusinessJobListCard>;
+            return (
+              <BusinessJobListCard {...job} navigation={this.props.navigation}>
+                {" "}
+              </BusinessJobListCard>
+            );
           })}
         </ScrollView>
       </View>

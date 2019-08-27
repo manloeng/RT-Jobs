@@ -68,3 +68,19 @@ export const postBusinessJob = async jobDetails => {
   } = await request.post(postBusinessJobs, { ...jobDetails });
   return job;
 };
+
+export const getJobByJobId = async job_id => {
+  const getJobByJobId = `/job/${job_id}`;
+  const {
+    data: { job }
+  } = await request.get(getJobByJobId, job_id);
+  return job;
+};
+
+export const getApplicantsByJobId = async job_id => {
+  const getApplicants = `/applications/?job_id=${job_id}`;
+  const {
+    data: { applications }
+  } = await request.get(getApplicants);
+  return applications;
+};
