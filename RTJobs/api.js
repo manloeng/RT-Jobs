@@ -84,3 +84,14 @@ export const getApplicantsByJobId = async job_id => {
   } = await request.get(getApplicants);
   return applications;
 };
+export const postBusinessApproval = async (app_id, res) => {
+  console.log(app_id, res, "post");
+  const postBusinessApproval = `/applications/${app_id}`;
+  const {
+    data: { application }
+  } = await request.patch(postBusinessApproval, {
+    confirmation: res
+  });
+  console.log(application, "app");
+  return application;
+};

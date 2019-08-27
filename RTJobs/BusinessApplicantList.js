@@ -45,14 +45,22 @@ class BusinessApplicantList extends React.Component {
         </View>
         <Text>Applications</Text>
         {applicants.map(applicant => {
-          console.log(applicant);
+          console.log(applicant, "here");
           return (
             <View>
               <Text>{applicant.display_name}</Text>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  api.postBusinessApproval(applicant.applications, "Approve");
+                }}
+              >
                 <Text>Confirm</Text>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  api.postBusinessApproval(applicant.applications, "Reject");
+                }}
+              >
                 <Text>Reject</Text>
               </TouchableOpacity>
               <TouchableOpacity>
