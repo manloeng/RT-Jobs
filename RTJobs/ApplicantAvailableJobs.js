@@ -1,5 +1,12 @@
 import React from "react";
-import { Text, Button, View, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  Text,
+  Button,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView
+} from "react-native";
 import { TextInput, FlatList } from "react-native-gesture-handler";
 import * as api from "./api";
 import JobCard from "./JobCard";
@@ -44,33 +51,37 @@ class ApplicantAvailableJobs extends React.Component {
       );
     return (
       <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() =>
-            navigate("ApplicantAvailableJobs", {
-              name: "ApplicantAvailableJobs"
-            })
-          }
-        >
-          <Text style={styles.text}>Jobs</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() =>
-            this.props.navigation.navigate("ApplicantJobsApplied", {
-              localId
-            })
-          }
-        >
-          <Text style={styles.text}>Applied</Text>
-        </TouchableOpacity>
         <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+          style={{
+            alignSelf: "stretch"
+          }}
         >
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() =>
+              navigate("ApplicantAvailableJobs", {
+                name: "ApplicantAvailableJobs"
+              })
+            }
+          >
+            <Text style={styles.text}>Jobs</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() =>
+              this.props.navigation.navigate("ApplicantJobsApplied", {
+                localId
+              })
+            }
+          >
+            <Text style={styles.text}>Applied</Text>
+          </TouchableOpacity>
+        </View>
+        <ScrollView>
           {jobs.map(job => {
             return <JobCard {...job} key={job.job_id}></JobCard>;
           })}
-        </View>
+        </ScrollView>
       </View>
     );
   }

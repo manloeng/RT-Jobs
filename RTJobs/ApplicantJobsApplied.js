@@ -1,5 +1,12 @@
 import React from "react";
-import { Text, Button, View, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  Text,
+  Button,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView
+} from "react-native";
 import { TextInput, FlatList } from "react-native-gesture-handler";
 import * as api from "./api";
 import ApplicationCard from "./ApplicationCard";
@@ -64,18 +71,17 @@ class ApplicantJobsApplied extends React.Component {
         >
           <Text style={styles.text}>Applied</Text>
         </TouchableOpacity>
-        <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-        >
+        <ScrollView>
           {applications.map(application => {
             return (
               <ApplicationCard
                 {...application}
                 key={application.app_id}
+                navigation={this.props.navigation}
               ></ApplicationCard>
             );
           })}
-        </View>
+        </ScrollView>
       </View>
     );
   }
