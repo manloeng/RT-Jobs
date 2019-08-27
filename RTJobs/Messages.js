@@ -31,12 +31,17 @@ class Messages extends Component {
     };
     this.sessionEventHandlers = {
       signal: (event) => {
-        console.log(event)
         if (event.data) {
           if (event.connectionId !== this.session.getSessionInfo().connection.connectionId) {
             const newMessage = JSON.parse(event.data);
             newMessage[0].user = { _id: 2 }
-            this.onSend(newMessage)
+            if (this.state.messages.length) {
+              if (newMessage[0]._id !== this.state.messages[0]._id) {
+                this.onSend(newMessage)
+              }
+            } else {
+              this.onSend(newMessage)
+            }
             this.setState({
               signal: { data: '', type: '' }
             });
@@ -51,23 +56,6 @@ class Messages extends Component {
     this.props.navigation.setParams({
       handleThis: this.changeChat
     });
-  }
-
-  componentWillMount() {
-    this.setState({
-      messages: [
-        {
-          _id: 1,
-          text: 'Hello developer',
-          createdAt: new Date(),
-          user: {
-            _id: 2,
-            name: 'React Native',
-            avatar: 'https://placeimg.com/140/140/any',
-          },
-        },
-      ],
-    })
   }
 
   sendSignal(messages) {
@@ -123,7 +111,7 @@ class Messages extends Component {
           }}
         />
         <GiftedChat
-          messages={this.state.messages}
+          messages={messages}
           onSend={messages => {
             this.onSend(messages);
             this.sendSignal(messages);
