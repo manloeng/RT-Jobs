@@ -63,7 +63,7 @@ class BusinessApplicantList extends React.Component {
               >
                 <Text>Reject</Text>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => {this.props.navigation.navigate("Chat")}}>
                 <Text>Contact</Text>
               </TouchableOpacity>
             </View>
