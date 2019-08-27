@@ -78,6 +78,7 @@ class ApplicantJobsApplied extends React.Component {
                 {...application}
                 key={application.app_id}
                 navigation={this.props.navigation}
+                updateApplications={this.updateApplications}
               ></ApplicationCard>
             );
           })}
@@ -98,6 +99,19 @@ class ApplicantJobsApplied extends React.Component {
         this.setState({ applications, isLoading: false });
       })
       .catch(e => console.log(e));
+  };
+
+  updateApplications = (u_uid, job_id) => {
+    // this.setState(currentState => {
+    //   jobs = currentState.jobs.map(job => {
+    //     if (job.job_id === job_id) {
+    //       job.applicants.push(u_uid);
+    //       console.log(job, "joooooob");
+    //       return job;
+    //     } else return job;
+    //   });
+    //   return jobs;
+    // });
   };
 }
 export default ApplicantJobsApplied;
