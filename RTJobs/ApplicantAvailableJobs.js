@@ -14,6 +14,7 @@ class ApplicantAvailableJobs extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     const { jobs, isLoading } = this.state;
+    console.log(jobs);
     if (isLoading)
       return (
         <View>
@@ -42,7 +43,7 @@ class ApplicantAvailableJobs extends React.Component {
         </TouchableOpacity>
         <View>
           {jobs.map(job => {
-            return <JobCard {...job}></JobCard>;
+            return <JobCard {...job} key={job.job_id}></JobCard>;
           })}
         </View>
       </View>
