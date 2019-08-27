@@ -8,7 +8,7 @@ import BusinessJobList from "./BusinessJobList";
 import BusinessPostJob from "./BusinessPostJob";
 import ApplicantAvailableJobs from "./ApplicantAvailableJobs";
 import ApplicantJobsApplied from "./ApplicantJobsApplied";
-
+import Chat from "./Chat";
 
 const MainNavigator = createStackNavigator({
   Home: { screen: Homepage },
@@ -19,7 +19,8 @@ const MainNavigator = createStackNavigator({
   BusinessJobList: { screen: BusinessJobList },
   BusinessPostJob: { screen: BusinessPostJob },
   ApplicantAvailableJobs: { screen: ApplicantAvailableJobs },
-  ApplicantJobsApplied: { screen: ApplicantJobsApplied }
+  ApplicantJobsApplied: { screen: ApplicantJobsApplied },
+  Chat: { screen: Chat }
 });
 
 const App = createAppContainer(MainNavigator);

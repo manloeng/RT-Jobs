@@ -10,6 +10,27 @@ import {
 import { TextInput } from "react-native-gesture-handler";
 import * as api from "./api";
 
+const styles = StyleSheet.create({
+  baseText: {
+    fontFamily: "Roboto"
+  },
+  title: {
+    fontSize: 50,
+    fontWeight: "bold",
+    alignItems: "center",
+    color: "#4c4f4f"
+  },
+  button: {
+    alignItems: "center",
+    backgroundColor: "#006767",
+    padding: 10,
+    borderRadius: 5
+  },
+  text: {
+    color: "white"
+  }
+});
+
 class ApplicantLogin extends React.Component {
   state = {
     email: "applicant@test.co.uk",
@@ -42,18 +63,20 @@ class ApplicantLogin extends React.Component {
           />
           <View style={{ margin: 7 }} />
           <TouchableOpacity
+            style={styles.button}
             onPress={(e, navigate) => {
               this.handleSubmit(e, navigate);
             }}
           >
-            <Text>Login</Text>
+            <Text style={styles.text}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity
+            style={styles.button}
             onPress={() =>
-              navigate("ApplicantSignup", { name: "ApplicantSignup" })
+              navigate("ApplicantSignUp", { name: "ApplicantSignUp" })
             }
           >
-            <Text>Sign Up</Text>
+            <Text style={styles.text}>Sign Up</Text>
           </TouchableOpacity>
         </View>
       </View>
