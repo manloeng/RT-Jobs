@@ -50,6 +50,51 @@ export const loginApplicant = async ({ email, password }) => {
   return user;
 };
 
+export const getJobsByBusinessId = async business_id => {
+  const getBusinessJobs = `/jobs/${business_id}`;
+  const {
+    data: { jobs }
+  } = await request.get(getBusinessJobs, {
+    business_id
+  });
+  return jobs;
+};
+
+export const postBusinessJob = async jobDetails => {
+  const postBusinessJobs = "jobs/";
+  const {
+    data: { job }
+  } = await request.post(postBusinessJobs, { ...jobDetails });
+  return job;
+};
+
+export const getJobByJobId = async job_id => {
+  const getJobByJobId = `/job/${job_id}`;
+  const {
+    data: { job }
+  } = await request.get(getJobByJobId, job_id);
+  return job;
+};
+
+export const getApplicantsByJobId = async job_id => {
+  const getApplicants = `/applications/?job_id=${job_id}`;
+  const {
+    data: { applications }
+  } = await request.get(getApplicants);
+  return applications;
+};
+export const postBusinessApproval = async (app_id, res) => {
+  console.log(app_id, res, "post");
+  const postBusinessApproval = `/applications/${app_id}`;
+  const {
+    data: { application }
+  } = await request.patch(postBusinessApproval, {
+    confirmation: res
+  });
+  console.log(application, "app");
+  return application;
+};
+
 export const getJobs = async () => {
   const getJobsLink = "/jobs";
   const {
@@ -65,3 +110,4 @@ export const getApplications = async localId => {
   } = await request.get(getApplicationsLink);
   return applications;
 };
+
