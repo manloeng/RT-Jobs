@@ -28,7 +28,7 @@ class BusinessJobListCard extends React.Component {
           <View>
             <Text>{title} </Text>
             <Text>{created_by} </Text>
-            <Text>Number of Vacancie: {vacancies} </Text>
+            <Text>Number of Vacancies: {vacancies} </Text>
             <Text>Location: {location} </Text>
             <Text>Pay: {pay} </Text>
             <Text>Start Time: {start_time} </Text>
