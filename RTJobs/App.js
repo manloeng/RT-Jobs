@@ -6,6 +6,7 @@ import VideoCallTest from "./VideoCallTest";
 import ChatTest from "./ChatTest";
 import JoinedChat from './JoinedChat';
 import UnmounterTest from './UnmounterTest';
+import Messages from './Messages';
 
 const MainNavigator = createStackNavigator({
   Home: { screen: Homepage },
@@ -13,7 +14,8 @@ const MainNavigator = createStackNavigator({
   ApplicantLogin: { screen: ApplicantLogin },
   //VideoCallTest: {screen: VideoCallTest},
   // ChatTest: {screen: ChatTest}
-   JoinedChat: { screen: JoinedChat }
+  JoinedChat: { screen: JoinedChat },
+  Messages: {screen: Messages}
   // UnmounterTest: { screen: UnmounterTest }
 });
 

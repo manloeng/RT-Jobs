@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, Button, TextInput, StyleSheet, FlatList, Text } from 'react-native';
 import { OTSession, OTPublisher, OTSubscriber } from 'opentok-react-native';
+import { GiftedChat } from 'react-native-gifted-chat'
+import Messages from './Messages';
 import apiKey from './opentokConfig';
 
 const OTSessionId = "2_MX40NjQwOTQzMn5-MTU2NjgxMDkwNzk3NH42Q2RqWm9BL3hNSHoxOG1Ma1hMeC9rWlB-UH4";
@@ -76,7 +78,15 @@ export default class ChatTest extends Component {
                     this.session = instance;
                   }}
                 />
-                <TextInput
+                <Messages />
+                {/* <GiftedChat
+                  messages={this.state.messages}
+                  onSend={messages => this.onSend(messages)}
+                  user={{
+                    _id: 1,
+                  }}
+                /> */}
+                {/* <TextInput
                   style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
                   onChangeText={(text) => { this.setState({ text }); }}
                   value={this.state.text}
@@ -88,8 +98,8 @@ export default class ChatTest extends Component {
                 <FlatList
                   data={this.state.messages}
                   renderItem={this._renderItem}
-                  keyExtractor={this._keyExtractor}
-                />
+                  keyExtractor={this._keyExtractor} 
+                />*/}
               </View>
             )
         }
@@ -106,6 +116,12 @@ export default class ChatTest extends Component {
       .then(({ token }) => {
         this.setState({ token })
       })
+  }
+
+  onSend(messages = []) {
+    this.setState(previousState => ({
+      messages: GiftedChat.append(previousState.messages, messages),
+    }), () => {console.log(this.state.messages)})
   }
 }
 
