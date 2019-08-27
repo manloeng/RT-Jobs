@@ -61,7 +61,6 @@ class BusinessLogin extends React.Component {
   }
   handleSubmit = e => {
     const { email, password } = this.state;
-    console.log(email);
     e.preventDefault();
     api
       .loginBusiness({ email, password })

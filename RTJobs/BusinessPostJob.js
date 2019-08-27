@@ -8,13 +8,20 @@ import {
   TextInput,
   TouchableOpacity
 } from "react-native";
+import * as api from "./api";
 
 class BusinessPostJob extends React.Component {
   static navigationOptions = {
     title: "RT Jobs"
   };
   state = {
-    text: ""
+    title: "",
+    vacancies: "",
+    description: "",
+    location: "",
+    pay: "",
+    start_time: "",
+    duration: ""
   };
   render() {
     return (
@@ -23,71 +30,99 @@ class BusinessPostJob extends React.Component {
         <Text>Title: </Text>
         <TextInput
           style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-          onChangeText={text => {
-            this.setState({ text });
+          onChange={e => {
+            this.onChangeText(e, "title");
           }}
-          value={this.state.text}
         />
         <Text>Vacancies: </Text>
         <TextInput
           style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-          onChangeText={text => {
-            this.setState({ text });
+          onChange={e => {
+            this.onChangeText(e, "vacancies");
           }}
-          value={this.state.text}
         />
 
         <Text>Location: </Text>
         <TextInput
           style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-          onChangeText={text => {
-            this.setState({ text });
+          onChange={e => {
+            this.onChangeText(e, "location");
           }}
-          value={this.state.text}
         />
         <Text>Pay: </Text>
         <TextInput
           style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-          onChangeText={text => {
-            this.setState({ text });
+          onChange={e => {
+            this.onChangeText(e, "pay");
           }}
-          value={this.state.text}
         />
         <Text>Start time: </Text>
         <TextInput
           style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-          onChangeText={text => {
-            this.setState({ text });
+          onChange={e => {
+            this.onChangeText(e, "start_time");
           }}
-          value={this.state.text}
         />
         <Text>Duration: </Text>
         <TextInput
           style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-          onChangeText={text => {
-            this.setState({ text });
+          onChange={e => {
+            this.onChangeText(e, "duration");
           }}
-          value={this.state.text}
         />
         <Text>Description: </Text>
         <TextInput
           style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-          onChangeText={text => {
-            this.setState({ text });
+          onChange={e => {
+            this.onChangeText(e, "description");
           }}
-          value={this.state.text}
         />
         <View>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={(e, navigate) => {
+              this.handleSubmit(e, navigate);
+            }}
+          >
             <Text>Post Job</Text>
           </TouchableOpacity>
         </View>
       </View>
     );
   }
-  onChangeText = e => {
-    console.log(e.nativeEvent.value);
-    this.setState({ text: e.nativeEvent.value });
+  onChangeText = (e, name) => {
+    const { text } = e.nativeEvent;
+    this.setState({ [name]: text });
+  };
+  handleSubmit = e => {
+    const {
+      description,
+      location,
+      pay,
+      duration,
+      start_time,
+      title,
+      vacancies
+    } = this.state;
+    e.preventDefault();
+    const { businessId } = this.props.navigation.state.params;
+    const jobDetails = {
+      created_by: "Hello",
+      date: Date.now(),
+      description,
+      location,
+      pay,
+      duration,
+      start_time,
+      title,
+      vacancies,
+      b_uid: businessId
+    };
+    api
+      .postBusinessJob(jobDetails)
+      .then(() => {
+        this.props.navigation.navigate("BusinessJobList");
+      })
+      .catch(e => console.log(e));
   };
 }
 export default BusinessPostJob;

@@ -25,7 +25,10 @@ class BusinessJobList extends React.Component {
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <TouchableOpacity
           onPress={() =>
-            navigate("BusinessPostJob", { name: "BusinessPostJob" })
+            navigate("BusinessPostJob", {
+              name: "BusinessPostJob",
+              businessId: this.props.navigation.state.params.localId
+            })
           }
         >
           <Text>Post Job</Text>

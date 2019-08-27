@@ -60,3 +60,11 @@ export const getJobsByBusinessId = async business_id => {
   });
   return jobs;
 };
+
+export const postBusinessJob = async jobDetails => {
+  const postBusinessJobs = "jobs/";
+  const {
+    data: { job }
+  } = await request.post(postBusinessJobs, { ...jobDetails });
+  return job;
+};

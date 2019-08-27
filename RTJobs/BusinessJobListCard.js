@@ -46,6 +46,11 @@ class BusinessJobListCard extends React.Component {
               <Text>Applicants</Text>
             </TouchableOpacity>
           </View>
+          <View>
+            <TouchableOpacity>
+              <Text>Delete</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </ScrollView>
     );
