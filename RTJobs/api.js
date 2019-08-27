@@ -50,3 +50,13 @@ export const loginApplicant = async ({ email, password }) => {
   console.log(user);
   return user;
 };
+
+export const getJobsByBusinessId = async business_id => {
+  const getBusinessJobs = `/jobs/${business_id}`;
+  const {
+    data: { jobs }
+  } = await request.get(getBusinessJobs, {
+    business_id
+  });
+  return jobs;
+};
