@@ -23,12 +23,18 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: "center",
-    backgroundColor: "#006767",
+    backgroundColor: "#F5F5EF",
+    color: "#047B84",
     padding: 10,
-    borderRadius: 5
+    borderRadius: 40,
+    borderColor: "#303838",
+    borderWidth: 1,
+    margin: 4
   },
   text: {
-    color: "white"
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#303838"
   }
 });
 
@@ -70,7 +76,12 @@ class ApplicantJobsApplied extends React.Component {
         </View>
       );
     return (
-      <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
+      <View
+        style={{
+          flex: 2,
+          backgroundColor: "#047B84"
+        }}
+      >
         <ScrollView>
           {applications.map(application => {
             return (
