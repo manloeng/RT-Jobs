@@ -1,6 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, Button, View , Image} from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { StyleSheet, Text, Button, View , Image, TouchableOpacity} from "react-native";
 
 const styles = StyleSheet.create({
   baseText: {
