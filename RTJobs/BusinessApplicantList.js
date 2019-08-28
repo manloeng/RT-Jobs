@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
     container: {
-    flex: 1,
+    flexGrow: 1,
     alignItems: "center",
     backgroundColor: '#047884'
   },
@@ -83,43 +83,52 @@ class BusinessApplicantList extends React.Component {
     } = this.state.job;
     const { applicants } = this.state;
     return (
-      <ScrollView>
-        <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <View >
           <View style={styles.subContainer}>
             {/* <Text style={styles.text}>Job Details:</Text> */}
             <Text style={styles.text}>{created_by}</Text>
+
+            <Text style={{  color: "#303838", fontWeight: "bold"}}>Job Description:</Text>
+            <Text>{description}{"\n"}</Text>
+            
             <Text>Position: {title}</Text>
             <Text>Start Date: {date}</Text>
             <Text>Location: {location}</Text>
             <Text>Vacancies: {vacancies}</Text>
             <Text>pph:{pay}</Text>
-            <Text>{description}</Text>
           </View>
-          <Text style={styles.title}>Applications</Text>
+          <Text style={[styles.title, {marginLeft: 40}]}>Applications</Text>
           {applicants.map(applicant => {
             console.log(applicant, "here");
             return (
               <View style={styles.applcaitionContainer}>
-                <Text style={styles.text}>{applicant.display_name}</Text>
-                <TouchableOpacity
-                style={styles.button}
-                  onPress={() => {
-                    api.postBusinessApproval(applicant.applications, "Approve");
-                  }}
-                >
-                  <Text>Confirm</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                style={styles.button}
-                  onPress={() => {
-                    api.postBusinessApproval(applicant.applications, "Reject");
-                  }}
-                >
-                  <Text>Reject</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
-                  <Text>Contact</Text>
-                </TouchableOpacity>
+                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                  <View style={{alignItems: 'center', width:150, justifyContent: 'center'}}> 
+                    <Text style={styles.text}>{applicant.display_name}</Text>
+                  </View>
+                  <TouchableOpacity style={[styles.button, {backgroundColor: '#af96ca'}]}>
+                    <Text>Contact</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                  <TouchableOpacity
+                  style={[styles.button, {backgroundColor: '#D2F2A6'}]}
+                    onPress={() => {
+                      api.postBusinessApproval(applicant.applications, "Approve");
+                    }}
+                  >
+                    <Text>Confirm</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={[styles.button, {backgroundColor: '#F5A758'}]}
+                    onPress={() => {
+                      api.postBusinessApproval(applicant.applications, "Reject");
+                    }}
+                  >
+                    <Text>Reject</Text>
+                  </TouchableOpacity>           
+                </View>
               </View>
             );
           })}
