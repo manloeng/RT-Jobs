@@ -36,7 +36,7 @@ class ApplicantJobsApplied extends React.Component {
   state = { applications: null, isLoading: true };
 
   static navigationOptions = {
-    title: "RT Jobs"
+    title: "Jobs Applied"
   };
 
   render() {

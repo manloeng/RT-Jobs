@@ -25,12 +25,13 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     borderColor: "#303838",
     borderWidth: 1,
-    margin: 4
+    margin: 4,
+    width: 200
   },
   text: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "white"
+    color: "#F5F5EF"
   },
 
   cardText: {
@@ -50,6 +51,21 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "#303838",
     padding: 2
+  },
+  textWhite: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#F5F5EF"
+  },
+  buttonGrey: {
+    alignItems: "center",
+    backgroundColor: "#303838",
+    padding: 10,
+    borderRadius: 40,
+    borderColor: "#303838",
+    borderWidth: 1,
+    margin: 4,
+    width: 200
   }
 });
 
@@ -105,18 +121,18 @@ class JobCard extends React.Component {
             <Text style={styles.cardText}>Job Description</Text>
             <Text style={styles.cardText}>{description} </Text>
           </View>
-          <View>
+          <View style={{ alignSelf: "center" }}>
             <Text style={styles.cardText}>Location: {location}</Text>
 
             {applicants.includes(u_uid) && (
               <TouchableOpacity
-                style={styles.button}
+                style={styles.buttonGrey}
                 disabled={true}
                 onPress={(e, navigate) => {
                   this.handlePress(e, navigate);
                 }}
               >
-                <Text style={styles.text}>Application Sent</Text>
+                <Text style={styles.textWhite}>Application Sent</Text>
               </TouchableOpacity>
             )}
 
