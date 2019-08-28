@@ -8,27 +8,49 @@ import {
   TouchableOpacity
 } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
+import * as api from "./api";
+import BusinessJobListCard from "./BusinessJobListCard";
 
 class BusinessJobList extends React.Component {
   static navigationOptions = {
     title: "RT Jobs"
   };
+  state = {
+    businessJobList: []
+  };
   render() {
-    const { navigate } = this.props.navigation;
+    const { businessJobList } = this.state;
+
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <TouchableOpacity
           onPress={() =>
-            navigate("BusinessPostJob", { name: "BusinessPostJob" })
+            navigate("BusinessPostJob", {
+              name: "BusinessPostJob",
+              businessId: this.props.navigation.state.params.localId
+            })
           }
         >
           <Text>Post Job</Text>
         </TouchableOpacity>
-        <View>
-          <Text style={{ fontSize: 20 }}>List of jobs go here</Text>
-        </View>
+        <ScrollView>
+          {businessJobList.map(job => {
+            return (
+              <BusinessJobListCard {...job} navigation={this.props.navigation}>
+                {" "}
+              </BusinessJobListCard>
+            );
+          })}
+        </ScrollView>
       </View>
     );
+  }
+  componentDidMount() {
+    api
+      .getJobsByBusinessId(this.props.navigation.state.params.localId)
+      .then(businessJobList => {
+        this.setState({ businessJobList });
+      });
   }
 }
 export default BusinessJobList;

@@ -64,8 +64,10 @@ class BusinessLogin extends React.Component {
     e.preventDefault();
     api
       .loginBusiness({ email, password })
+
       .then(({ email, localId }) => {
-        navigate("BusinessLogin", { email, localId });
+        if (localId)
+          this.props.navigation.navigate("BusinessJobList", { email, localId });
       })
       .catch(e => console.log(e));
   };
