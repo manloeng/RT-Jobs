@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Button, TouchableOpacity, TextInput, StyleSheet, FlatList, Text, Dimensions } from 'react-native';
+import { View, TouchableOpacity, Text, Dimensions } from 'react-native';
 import { OTSession, OTPublisher, OTSubscriber } from 'opentok-react-native';
 import { GiftedChat, Bubble } from 'react-native-gifted-chat'
 import apiKey from './opentokConfig';
+import Questions from './Questions';
 
 const OTSessionId = "2_MX40NjQwOTQzMn5-MTU2NjgxMDkwNzk3NH42Q2RqWm9BL3hNSHoxOG1Ma1hMeC9rWlB-UH4";
 
@@ -13,7 +14,7 @@ class Chat extends Component {
     return {
       headerTitle: params ? params.headTitle : 'Chat',
       headerRight: <TouchableOpacity onPress={() => params.handleThis()} style={{ marginRight: 10, padding: 10, borderColor: '#047b84', borderWidth: 2, borderRadius: 40 }}>
-        <Text style={{ fontWeight: 'bold', fontSize: 15, color: '#111111' }}>{params ? params.buttonText : 'Switch'}</Text>
+        <Text style={{ fontWeight: 'bold', fontSize: 15, color: '#000000' }}>{params ? params.buttonText : 'Switch'}</Text>
       </TouchableOpacity>
     }
   };
@@ -52,10 +53,11 @@ class Chat extends Component {
   }
 
   componentDidMount() {
+    const { business, created_by, display_name } = this.props.navigation.state.params;
     this.getToken(OTSessionId);
     this.props.navigation.setParams({
       handleThis: this.changeChat,
-      headTitle: 'Mr Business',
+      headTitle: business ? display_name : created_by,
       buttonText: this.state.video ? 'Chat' : 'Interview'
     });
   }
@@ -108,18 +110,18 @@ class Chat extends Component {
   render() {
     const { video, messages, token, signal } = this.state;
     const { height, width } = Dimensions.get('window');
-    const [display_name, created_by] = ["jim", 'mr business']
+    const { business, applications } = this.props.navigation.state.params;
     if (!token) return <Text>Loading...</Text>
     if (video) {
       return (
         <View style={{ flex: 1, flexDirection: 'column', backgroundColor: "#047B84" }}>
-          <OTSession apiKey={apiKey} sessionId={OTSessionId} token={token} style={{ flex: 5, flexDirection: "column", justifyContent: 'flex-start', alignItems: "center" }}>
+          <OTSession apiKey={apiKey} sessionId={OTSessionId} token={token} style={{ flex: 6, flexDirection: "column", justifyContent: 'flex-start', alignItems: "center" }}>
             <OTPublisher style={{
               position: 'absolute', top: 10, right: 10, width: 90, height: 90, zIndex: 1000
             }} />
             <OTSubscriber style={{ width: width * 0.8, height: height * 0.6, top: 110 }} />
           </OTSession>
-          
+          {business && <Questions style={{ flex: 1 }} id={applications}/>}
         </View>
       )
     }

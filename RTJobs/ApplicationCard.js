@@ -46,7 +46,8 @@ class ApplicationCard extends React.Component {
       pay,
       start_time,
       title,
-      vacancies
+      vacancies,
+      applications
     } = this.props;
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -95,7 +96,8 @@ class ApplicationCard extends React.Component {
             navigate("Chat", {
               display_name,
               created_by,
-              token
+              token,
+              applications
             })
           }
         >
