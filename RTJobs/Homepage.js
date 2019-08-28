@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, Button, View } from "react-native";
+import { StyleSheet, Text, Button, View , Image} from "react-native";
 
 const styles = StyleSheet.create({
   baseText: {
@@ -9,17 +9,23 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     alignItems: "center"
+  },
+    container: {
+    flex: 1,
+    alignItems: "center", 
+    justifyContent: "center",
+    backgroundColor: '#047884'
   }
 });
 
 class Homepage extends React.Component {
   static navigationOptions = {
-    title: "RT Jobs"
+    header: null
   };
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View style={styles.container}>
         <Text style={styles.title}>RT Jobs</Text>
         <Text>I am a:</Text>
         <View style={{ width: 100, height: 35, alignContent: "flex-end" }}>
