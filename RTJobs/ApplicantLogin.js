@@ -15,11 +15,11 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto"
   },
   title: {
-    fontSize: 50,
+    fontSize: 35,
     fontWeight: "bold",
     alignItems: "center",
-    color: "#4c4f4f",
-    marginBottom: 30
+    color: "#F5F5EF",
+    margin: 35
   },
 
   button: {
@@ -71,21 +71,11 @@ class ApplicantLogin extends React.Component {
           backgroundColor: "#047B84"
         }}
       >
-        <View
-          style={{
-            color: "white",
-            fontSize: 35,
-            fontWeight: "bold",
-            marginBottom: 400
-          }}
-        >
-          <Text>Applicant Login</Text>
-        </View>
+        <Text style={styles.title}>Applicant Login</Text>
 
         <View>
           <TextInput
             style={styles.textarea}
-            style={{ margin: 40 }}
             onChange={e => {
               this.handleTextChange(e, "email");
             }}
