@@ -42,17 +42,12 @@ class BusinessJobList extends React.Component {
     const { navigate } = this.props.navigation;
 
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <TouchableOpacity
-          onPress={() =>
-            navigate("BusinessPostJob", {
-              name: "BusinessPostJob",
-              businessId: this.props.navigation.state.params.localId
-            })
-          }
-        >
-          <Text>Post Job</Text>
-        </TouchableOpacity>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: "#047B84"
+        }}
+      >
         <ScrollView>
           {businessJobList.map(job => {
             return (
