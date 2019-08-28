@@ -36,12 +36,13 @@ class ApplicantJobsApplied extends React.Component {
   state = { applications: null, isLoading: true };
 
   static navigationOptions = {
-    title: "RT Jobs"
+    title: "Jobs Applied"
   };
 
   render() {
     const { navigate } = this.props.navigation;
     const { applications, isLoading } = this.state;
+    console.log(applications, "applications");
     const { localId } = this.props.navigation.state.params;
     if (isLoading)
       return (
@@ -78,6 +79,7 @@ class ApplicantJobsApplied extends React.Component {
                 {...application}
                 key={application.app_id}
                 navigation={this.props.navigation}
+                updateApplications={this.updateApplications}
               ></ApplicationCard>
             );
           })}
@@ -98,6 +100,18 @@ class ApplicantJobsApplied extends React.Component {
         this.setState({ applications, isLoading: false });
       })
       .catch(e => console.log(e));
+  };
+
+  updateApplications = ({ app_id, confirmation }) => {
+    this.setState(currentState => {
+      applications = currentState.applications.map(application => {
+        if (application.applications === app_id) {
+          application.confirmation = confirmation;
+          return application;
+        } else return application;
+      });
+      return applications;
+    });
   };
 }
 export default ApplicantJobsApplied;

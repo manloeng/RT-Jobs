@@ -23,12 +23,18 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: "center",
-    backgroundColor: "#006767",
+    backgroundColor: "#F5F5EF",
+    color: "#047B84",
     padding: 10,
-    borderRadius: 5
+    borderRadius: 40,
+    borderColor: "#303838",
+    borderWidth: 1,
+    margin: 4
   },
   text: {
-    color: "white"
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#303838"
   }
 });
 
@@ -36,13 +42,13 @@ class ApplicantAvailableJobs extends React.Component {
   state = { jobs: null, isLoading: true };
 
   static navigationOptions = {
-    title: "RT Jobs"
+    title: "Available Jobs"
   };
 
   render() {
     const { navigate } = this.props.navigation;
     const { jobs, isLoading } = this.state;
-    const { localId } = this.props.navigation.state.params;
+    const { localId, display_name } = this.props.navigation.state.params;
     if (isLoading)
       return (
         <View>
@@ -50,10 +56,16 @@ class ApplicantAvailableJobs extends React.Component {
         </View>
       );
     return (
-      <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
+      <View
+        style={{
+          flex: 2,
+          backgroundColor: "#047B84"
+        }}
+      >
         <View
           style={{
-            alignSelf: "stretch"
+            flexDirection: "row",
+            justifyContent: "space-between"
           }}
         >
           <TouchableOpacity
@@ -79,7 +91,16 @@ class ApplicantAvailableJobs extends React.Component {
         </View>
         <ScrollView>
           {jobs.map(job => {
-            return <JobCard {...job} key={job.job_id}></JobCard>;
+            return (
+              <JobCard
+                {...job}
+                u_uid={localId}
+                key={job.job_id}
+                navigation={this.props.navigation}
+                display_name={display_name}
+                updateJobs={this.updateJobs}
+              ></JobCard>
+            );
           })}
         </ScrollView>
       </View>
@@ -97,6 +118,18 @@ class ApplicantAvailableJobs extends React.Component {
         this.setState({ jobs, isLoading: false });
       })
       .catch(e => console.log(e));
+  };
+
+  updateJobs = (u_uid, job_id) => {
+    this.setState(currentState => {
+      jobs = currentState.jobs.map(job => {
+        if (job.job_id === job_id) {
+          job.applicants.push(u_uid);
+          return job;
+        } else return job;
+      });
+      return jobs;
+    });
   };
 }
 export default ApplicantAvailableJobs;

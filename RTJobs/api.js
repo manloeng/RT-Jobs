@@ -111,3 +111,18 @@ export const getApplications = async localId => {
   return applications;
 };
 
+export const postApplication = async postApplication => {
+  const postApplicationsLink = "applications/";
+  const {
+    data: { application }
+  } = await request.post(postApplicationsLink, postApplication);
+  return application;
+};
+
+export const patchApplication = async (applications, confirmation) => {
+  const patchApplicationsLink = `applications/${applications}`;
+  const {
+    data: { application }
+  } = await request.patch(patchApplicationsLink, { confirmation });
+  return application;
+};
