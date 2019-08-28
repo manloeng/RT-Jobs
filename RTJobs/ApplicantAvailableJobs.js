@@ -41,8 +41,27 @@ const styles = StyleSheet.create({
 class ApplicantAvailableJobs extends React.Component {
   state = { jobs: null, isLoading: true };
 
-  static navigationOptions = {
-    title: "Available Jobs"
+  static navigationOptions = ({ navigation }) => {
+    const { params = {} } = navigation.state;
+    return {
+      title: "Available Jobs",
+      headerRight: (
+        <TouchableOpacity
+          onPress={() => params.handleThis()}
+          style={{
+            marginRight: 10,
+            padding: 10,
+            borderColor: "#047b84",
+            borderWidth: 2,
+            borderRadius: 40
+          }}
+        >
+          <Text style={{ fontWeight: "bold", fontSize: 15, color: "#111111" }}>
+            Applied
+          </Text>
+        </TouchableOpacity>
+      )
+    };
   };
 
   render() {
@@ -62,33 +81,6 @@ class ApplicantAvailableJobs extends React.Component {
           backgroundColor: "#047B84"
         }}
       >
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between"
-          }}
-        >
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() =>
-              navigate("ApplicantAvailableJobs", {
-                name: "ApplicantAvailableJobs"
-              })
-            }
-          >
-            <Text style={styles.text}>Jobs</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() =>
-              this.props.navigation.navigate("ApplicantJobsApplied", {
-                localId
-              })
-            }
-          >
-            <Text style={styles.text}>Applied</Text>
-          </TouchableOpacity>
-        </View>
         <ScrollView>
           {jobs.map(job => {
             return (
@@ -109,7 +101,18 @@ class ApplicantAvailableJobs extends React.Component {
 
   componentDidMount() {
     this.fetchJobs();
+
+    this.props.navigation.setParams({
+      handleThis: this.changeNavigate
+    });
   }
+
+  changeNavigate = () => {
+    const { localId } = this.props.navigation.state.params;
+    this.props.navigation.navigate("ApplicantJobsApplied", {
+      localId
+    });
+  };
 
   fetchJobs = () => {
     api

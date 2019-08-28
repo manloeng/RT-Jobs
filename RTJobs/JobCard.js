@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     width: 200
   },
   text: {
-    fontSize: 20,
+    fontSize: 15,
     fontWeight: "bold",
     color: "#F5F5EF"
   },
@@ -53,13 +53,13 @@ const styles = StyleSheet.create({
     padding: 2
   },
   textWhite: {
-    fontSize: 20,
+    fontSize: 15,
     fontWeight: "bold",
-    color: "#F5F5EF"
+    color: "#303838"
   },
   buttonGrey: {
     alignItems: "center",
-    backgroundColor: "#303838",
+    backgroundColor: "#D7D9D9",
     padding: 10,
     borderRadius: 40,
     borderColor: "#303838",
