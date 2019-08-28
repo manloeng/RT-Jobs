@@ -7,7 +7,8 @@ import {
   ScrollView,
   TouchableOpacity
 } from "react-native";
-
+import { TextInput } from "react-native-gesture-handler";
+import * as api from "./api";
 
 class BusinessJobListCard extends React.Component {
   render() {
@@ -21,6 +22,7 @@ class BusinessJobListCard extends React.Component {
       duration,
       description
     } = this.props;
+    // console.log(this.props, "here!");
     return (
       <ScrollView>
         <View>
