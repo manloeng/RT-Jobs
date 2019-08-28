@@ -7,6 +7,7 @@ import {
   StyleSheet
 } from "react-native";
 import Chat from "./Chat";
+import * as api from "./api";
 
 const styles = StyleSheet.create({
   baseText: {
@@ -49,6 +50,35 @@ class ApplicationCard extends React.Component {
     } = this.props;
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        {confirmation === "null" && (
+          <TouchableOpacity style={styles.button} disabled={true}>
+            <Text style={styles.text}>Pending</Text>
+          </TouchableOpacity>
+        )}
+
+        {confirmation === "rejected" && (
+          <TouchableOpacity style={styles.button} disabled={true}>
+            <Text style={styles.text}>Rejected</Text>
+          </TouchableOpacity>
+        )}
+
+        {confirmation === "accepted" && (
+          <TouchableOpacity style={styles.button} disabled={true}>
+            <Text style={styles.text}>Accepted</Text>
+          </TouchableOpacity>
+        )}
+
+        {confirmation === "offer" && (
+          <TouchableOpacity
+            style={styles.button}
+            onPress={(e, navigate) => {
+              this.handlePress(e, "Accepted");
+            }}
+          >
+            <Text style={styles.text}>Accept?</Text>
+          </TouchableOpacity>
+        )}
+
         <Text>{created_at} </Text>
         <Text>{title} </Text>
         <Text>{created_by} </Text>
@@ -74,5 +104,14 @@ class ApplicationCard extends React.Component {
       </View>
     );
   }
+  handlePress = (e, confirmation) => {
+    const { applications } = this.props;
+    api
+      .patchApplication(applications, confirmation)
+      .then(application => {
+        this.props.updateApplications(application);
+      })
+      .catch(e => console.log(e));
+  };
 }
 export default ApplicationCard;

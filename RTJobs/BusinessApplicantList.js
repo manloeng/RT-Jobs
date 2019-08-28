@@ -107,9 +107,19 @@ class BusinessApplicantList extends React.Component {
                   <View style={{alignItems: 'center', width:150, justifyContent: 'center'}}> 
                     <Text style={styles.text}>{applicant.display_name}</Text>
                   </View>
-                  <TouchableOpacity style={[styles.button, {backgroundColor: '#af96ca'}]}>
+                  <TouchableOpacity onPress={() => {
+                this.props.navigation.navigate("Chat", {
+                  display_name: applicant.display_name,
+                  created_by: applicant.created_by,
+                  business: true,
+                  token
+                })
+              }}
+              style={[styles.button, {backgroundColor: '#af96ca'}]}>
                     <Text>Contact</Text>
                   </TouchableOpacity>
+                <Text>Contact</Text>
+              </TouchableOpacity>
                 </View>
                 <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                   <TouchableOpacity
@@ -133,7 +143,6 @@ class BusinessApplicantList extends React.Component {
             );
           })}
         </View>
-      </ScrollView>
     );
   }
   componentDidMount() {

@@ -3,6 +3,45 @@ import { StyleSheet, Text, Button, View, ScrollView } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import * as api from "./api";
 
+const styles = StyleSheet.create({
+  baseText: {
+    fontFamily: "Roboto"
+  },
+  title: {
+    fontSize: 35,
+    fontWeight: "bold",
+    alignItems: "center",
+    color: "#F5F5EF",
+    margin: 35
+  },
+
+  button: {
+    alignItems: "center",
+    backgroundColor: "#F5F5EF",
+    padding: 10,
+    borderRadius: 40,
+    borderColor: "#303838",
+    borderWidth: 1,
+    margin: 4
+  },
+  textarea: {
+    backgroundColor: "#F5F5EF",
+    borderRadius: 40,
+    borderColor: "#303838",
+    borderWidth: 1,
+    width: 200,
+    margin: 5,
+    color: "#303838",
+    fontWeight: "bold",
+    fontSize: 15
+  },
+  text: {
+    color: "#303838",
+    fontWeight: "bold",
+    fontSize: 20
+  }
+});
+
 class BusinessSignup extends React.Component {
   state = {
     display_name: "",
@@ -10,15 +49,23 @@ class BusinessSignup extends React.Component {
     password: ""
   };
   static navigationOptions = {
-    title: "RT Jobs"
+    title: "Sign Up"
   };
 
   render() {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text style={{ fontSize: 20 }}>Business Sign Up</Text>
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "#047B84"
+        }}
+      >
+        <Text style={styles.title}>Business Sign Up</Text>
         <View>
           <TextInput
+            style={styles.textarea}
             onChange={e => {
               this.handleTextChange(e, "display_name");
             }}
@@ -26,6 +73,7 @@ class BusinessSignup extends React.Component {
             name="display_name"
           />
           <TextInput
+            style={styles.textarea}
             onChange={e => {
               this.handleTextChange(e, "email");
             }}
@@ -33,6 +81,7 @@ class BusinessSignup extends React.Component {
             name="email"
           />
           <TextInput
+            style={styles.textarea}
             onChange={e => {
               this.handleTextChange(e, "password");
             }}
@@ -43,6 +92,7 @@ class BusinessSignup extends React.Component {
           />
           <View style={{ margin: 7 }} />
           <TouchableOpacity
+            style={styles.button}
             onChange={this.handleTextChange}
             type="submit"
             value="Submit"
@@ -50,7 +100,7 @@ class BusinessSignup extends React.Component {
               this.handleSubmit(e);
             }}
           >
-            <Text>Sign Up</Text>
+            <Text style={styles.text}>Sign Up</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -63,7 +113,12 @@ class BusinessSignup extends React.Component {
     api
       .postBusiness({ display_name, email, password })
       .then(({ display_name, email, localId }) => {
-        navigate("BusinessLogin", { display_name, email, localId });
+        if (localId)
+          this.props.navigation.navigate("BusinessLogin", {
+            display_name,
+            email,
+            localId
+          });
       })
       .catch(e => console.log(e));
   };
