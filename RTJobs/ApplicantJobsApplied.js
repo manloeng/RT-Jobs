@@ -35,8 +35,27 @@ const styles = StyleSheet.create({
 class ApplicantJobsApplied extends React.Component {
   state = { applications: null, isLoading: true };
 
-  static navigationOptions = {
-    title: "Jobs Applied"
+  static navigationOptions = ({ navigation }) => {
+    const { params = {} } = navigation.state;
+    return {
+      title: "Applied Jobs",
+      headerRight: (
+        <TouchableOpacity
+          onPress={() => params.handleThis()}
+          style={{
+            marginRight: 10,
+            padding: 10,
+            borderColor: "#047b84",
+            borderWidth: 2,
+            borderRadius: 40
+          }}
+        >
+          <Text style={{ fontWeight: "bold", fontSize: 15, color: "#111111" }}>
+            Jobs
+          </Text>
+        </TouchableOpacity>
+      )
+    };
   };
 
   render() {
@@ -52,26 +71,6 @@ class ApplicantJobsApplied extends React.Component {
       );
     return (
       <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() =>
-            navigate("ApplicantAvailableJobs", {
-              name: "ApplicantAvailableJobs"
-            })
-          }
-        >
-          <Text style={styles.text}>Jobs</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() =>
-            navigate("ApplicantJobsApplied", {
-              name: "ApplicantJobsApplied"
-            })
-          }
-        >
-          <Text style={styles.text}>Applied</Text>
-        </TouchableOpacity>
         <ScrollView>
           {applications.map(application => {
             return (
@@ -90,7 +89,18 @@ class ApplicantJobsApplied extends React.Component {
 
   componentDidMount() {
     this.fetchApplications();
+
+    this.props.navigation.setParams({
+      handleThis: this.changeNavigate
+    });
   }
+
+  changeNavigate = () => {
+    const { localId } = this.props.navigation.state.params;
+    this.props.navigation.navigate("ApplicantAvailableJobs", {
+      localId
+    });
+  };
 
   fetchApplications = () => {
     const { localId } = this.props.navigation.state.params;
