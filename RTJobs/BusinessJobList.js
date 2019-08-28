@@ -20,6 +20,7 @@ class BusinessJobList extends React.Component {
   };
   render() {
     const { businessJobList } = this.state;
+    const { navigate } = this.props.navigation;
 
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
