@@ -63,7 +63,14 @@ class BusinessApplicantList extends React.Component {
               >
                 <Text>Reject</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => {this.props.navigation.navigate("Chat")}}>
+              <TouchableOpacity onPress={() => {
+                this.props.navigation.navigate("Chat", {
+                  display_name: applicant.display_name,
+                  created_by: applicant.created_by,
+                  business: true,
+                  token
+                })
+              }}>
                 <Text>Contact</Text>
               </TouchableOpacity>
             </View>
