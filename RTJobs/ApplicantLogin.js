@@ -18,16 +18,35 @@ const styles = StyleSheet.create({
     fontSize: 50,
     fontWeight: "bold",
     alignItems: "center",
-    color: "#4c4f4f"
+    color: "#4c4f4f",
+    marginBottom: 30
   },
+
   button: {
     alignItems: "center",
-    backgroundColor: "#006767",
+    backgroundColor: "#F5F5EF",
     padding: 10,
-    borderRadius: 5
+    borderRadius: 5,
+    borderRadius: 40,
+    borderColor: "#303838",
+    borderWidth: 1,
+    margin: 4
+  },
+  textarea: {
+    backgroundColor: "#F5F5EF",
+    borderRadius: 40,
+    borderColor: "#303838",
+    borderWidth: 1,
+    width: 200,
+    margin: 5,
+    color: "#303838",
+    fontWeight: "bold",
+    fontSize: 15
   },
   text: {
-    color: "white"
+    color: "#303838",
+    fontWeight: "bold",
+    fontSize: 20
   }
 });
 
@@ -38,22 +57,42 @@ class ApplicantLogin extends React.Component {
   };
 
   static navigationOptions = {
-    title: "RT Jobs"
+    title: "Login"
   };
 
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text style={{ fontSize: 20 }}>Applicant Login</Text>
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "#047B84"
+        }}
+      >
+        <View
+          style={{
+            color: "white",
+            fontSize: 35,
+            fontWeight: "bold",
+            marginBottom: 400
+          }}
+        >
+          <Text>Applicant Login</Text>
+        </View>
+
         <View>
           <TextInput
+            style={styles.textarea}
+            style={{ margin: 40 }}
             onChange={e => {
               this.handleTextChange(e, "email");
             }}
             placeholder="Email Address"
           />
           <TextInput
+            style={styles.textarea}
             onChange={e => {
               this.handleTextChange(e, "password");
             }}
