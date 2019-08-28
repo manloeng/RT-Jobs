@@ -23,12 +23,17 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: "center",
-    backgroundColor: "#006767",
+    backgroundColor: "#F5F5EF",
+    color: "#047B84",
     padding: 10,
-    borderRadius: 5
+    borderRadius: 40,
+    borderColor: "#303838",
+    borderWidth: 1,
+    margin: 4
   },
   text: {
-    color: "white"
+    fontSize: 20,
+    fontWeight: "bold"
   }
 });
 
@@ -36,14 +41,13 @@ class ApplicantAvailableJobs extends React.Component {
   state = { jobs: null, isLoading: true };
 
   static navigationOptions = {
-    title: "RT Jobs"
+    title: "Available Jobs"
   };
 
   render() {
     const { navigate } = this.props.navigation;
     const { jobs, isLoading } = this.state;
     const { localId, display_name } = this.props.navigation.state.params;
-    console.log(this.state.jobs, "statejobs");
     if (isLoading)
       return (
         <View>
@@ -51,9 +55,15 @@ class ApplicantAvailableJobs extends React.Component {
         </View>
       );
     return (
-      <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
+      <View
+        style={{
+          flex: 2,
+          backgroundColor: "#047B84"
+        }}
+      >
         <View
           style={{
+            flexDirection: "row",
             justifyContent: "space-between"
           }}
         >
@@ -114,7 +124,6 @@ class ApplicantAvailableJobs extends React.Component {
       jobs = currentState.jobs.map(job => {
         if (job.job_id === job_id) {
           job.applicants.push(u_uid);
-          console.log(job, "joooooob");
           return job;
         } else return job;
       });
