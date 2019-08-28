@@ -41,7 +41,8 @@ const styles = StyleSheet.create({
     margin: 5,
     color: "#303838",
     fontWeight: "bold",
-    fontSize: 15
+    fontSize: 15,
+    textAlign: "center"
   },
   text: {
     color: "#303838",
