@@ -86,10 +86,18 @@ class BusinessApplicantList extends React.Component {
       <ScrollView contentContainerStyle={styles.container}>
         <View >
           <View style={styles.subContainer}>
-            {/* <Text style={styles.text}>Job Details:</Text> */}
             <Text style={styles.text}>{created_by}</Text>
 
-            <Text style={{  color: "#303838", fontWeight: "bold"}}>Job Description:</Text>
+            <Text 
+            onPress={() => {
+                this.props.navigation.navigate("Chat", {
+                  display_name: applicant.display_name,
+                  created_by: applicant.created_by,
+                  business: true,
+                  token: applicant.token
+                })
+              }} 
+              style={{  color: "#303838", fontWeight: "bold"}}>Job Description:</Text>
             <Text>{description}{"\n"}</Text>
             
             <Text>Position: {title}</Text>
@@ -107,25 +115,15 @@ class BusinessApplicantList extends React.Component {
                   <View style={{alignItems: 'center', width:150, justifyContent: 'center'}}> 
                     <Text style={styles.text}>{applicant.display_name}</Text>
                   </View>
-                  <TouchableOpacity onPress={() => {
-                this.props.navigation.navigate("Chat", {
-                  display_name: applicant.display_name,
-                  created_by: applicant.created_by,
-                  business: true,
-                  token
-                })
-              }}
-              style={[styles.button, {backgroundColor: '#af96ca'}]}>
+                  <TouchableOpacity style={[styles.button, {backgroundColor: '#af96ca'}]}>
                     <Text>Contact</Text>
                   </TouchableOpacity>
-                <Text>Contact</Text>
-              </TouchableOpacity>
                 </View>
                 <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                   <TouchableOpacity
                   style={[styles.button, {backgroundColor: '#D2F2A6'}]}
                     onPress={() => {
-                      api.postBusinessApproval(applicant.applications, "Approve");
+                      api.postBusinessApproval(applicant.applications, "accepted");
                     }}
                   >
                     <Text>Confirm</Text>
@@ -133,8 +131,7 @@ class BusinessApplicantList extends React.Component {
                   <TouchableOpacity
                     style={[styles.button, {backgroundColor: '#F5A758'}]}
                     onPress={() => {
-                      api.postBusinessApproval(applicant.applications, "Reject");
-                    }}
+                      api.postBusinessApproval(applicant.applications, "rejected")}}
                   >
                     <Text>Reject</Text>
                   </TouchableOpacity>           
@@ -143,6 +140,7 @@ class BusinessApplicantList extends React.Component {
             );
           })}
         </View>
+      </ScrollView>
     );
   }
   componentDidMount() {
@@ -156,3 +154,4 @@ class BusinessApplicantList extends React.Component {
   }
 }
 export default BusinessApplicantList;
+
