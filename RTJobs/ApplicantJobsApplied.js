@@ -42,6 +42,7 @@ class ApplicantJobsApplied extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     const { applications, isLoading } = this.state;
+    console.log(applications, "applications");
     const { localId } = this.props.navigation.state.params;
     if (isLoading)
       return (
@@ -101,17 +102,16 @@ class ApplicantJobsApplied extends React.Component {
       .catch(e => console.log(e));
   };
 
-  updateApplications = (u_uid, job_id) => {
-    // this.setState(currentState => {
-    //   jobs = currentState.jobs.map(job => {
-    //     if (job.job_id === job_id) {
-    //       job.applicants.push(u_uid);
-    //       console.log(job, "joooooob");
-    //       return job;
-    //     } else return job;
-    //   });
-    //   return jobs;
-    // });
+  updateApplications = ({ app_id, confirmation }) => {
+    this.setState(currentState => {
+      applications = currentState.applications.map(application => {
+        if (application.applications === app_id) {
+          application.confirmation = confirmation;
+          return application;
+        } else return application;
+      });
+      return applications;
+    });
   };
 }
 export default ApplicantJobsApplied;

@@ -48,7 +48,6 @@ class ApplicationCard extends React.Component {
       title,
       vacancies
     } = this.props;
-    console.log(confirmation, "Y/N");
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         {confirmation === "null" && (
@@ -57,11 +56,23 @@ class ApplicationCard extends React.Component {
           </TouchableOpacity>
         )}
 
+        {confirmation === "rejected" && (
+          <TouchableOpacity style={styles.button} disabled={true}>
+            <Text style={styles.text}>Rejected</Text>
+          </TouchableOpacity>
+        )}
+
+        {confirmation === "accepted" && (
+          <TouchableOpacity style={styles.button} disabled={true}>
+            <Text style={styles.text}>Accepted</Text>
+          </TouchableOpacity>
+        )}
+
         {confirmation === "offer" && (
           <TouchableOpacity
             style={styles.button}
             onPress={(e, navigate) => {
-              this.handlePress(e, "accepted");
+              this.handlePress(e, "Accepted");
             }}
           >
             <Text style={styles.text}>Accept?</Text>
@@ -98,7 +109,7 @@ class ApplicationCard extends React.Component {
     api
       .patchApplication(applications, confirmation)
       .then(application => {
-        console.log(application, "aaaa");
+        this.props.updateApplications(application);
       })
       .catch(e => console.log(e));
   };
