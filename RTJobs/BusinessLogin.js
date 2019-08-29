@@ -79,13 +79,7 @@ class BusinessLogin extends React.Component {
         />
         <Text style={styles.title}>Business Login</Text>
         <View>
-          <TextInput
-            style={styles.textarea}
-            onChange={e => {
-              this.handleTextChange(e, "email");
-            }}
-            placeholder="Email Address"
-          />
+          <TextInput style={styles.textarea} placeholder="Email Address" />
           <TextInput
             style={styles.textarea}
             onChange={e => {

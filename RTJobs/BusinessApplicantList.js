@@ -80,6 +80,11 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "#303838",
     padding: 2
+  },
+  buttonTextWhite: {
+    color: "#F5F5EF",
+    fontWeight: "bold",
+    fontSize: 15
   }
 });
 
@@ -185,9 +190,9 @@ class BusinessApplicantList extends React.Component {
                           reloadFunc: this.reloadApplications
                         });
                       }}
-                      style={[styles.button, { backgroundColor: "#af96ca" }]}
+                      style={[styles.button, { backgroundColor: "#047B84" }]}
                     >
-                      <Text style={styles.buttonText}>Contact</Text>
+                      <Text style={styles.buttonTextWhite}>Contact</Text>
                     </TouchableOpacity>
                   )}
                 </View>
@@ -255,15 +260,17 @@ class BusinessApplicantList extends React.Component {
                     )}
                   </TouchableOpacity>
                 </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-around"
-                  }}
-                >
-                  <Text style={styles.detailText}>Interview Score: </Text>
-                  <Star score={applicant.score} />
-                </View>
+                {applicant.score > 0 && (
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-around"
+                    }}
+                  >
+                    <Text style={styles.detailText}>Interview Score: </Text>
+                    <Star score={applicant.score} />
+                  </View>
+                )}
               </View>
             );
           })}
