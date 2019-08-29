@@ -12,8 +12,7 @@ import apiKey from "./opentokConfig";
 import Questions from "./Questions";
 import * as api from "./api";
 
-const OTSessionId =
-  "2_MX40NjQwOTQzMn5-MTU2NjgxMDkwNzk3NH42Q2RqWm9BL3hNSHoxOG1Ma1hMeC9rWlB-UH4";
+const OTSessionId = "2_MX40NjQwOTQzMn5-MTU2NzA5MjkxNjQ5OH4rcjhUcS9IeHhHWUI5UHBVK3l3a0gzam1-UH4";
 
 class Chat extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -113,7 +112,7 @@ class Chat extends Component {
   }
 
   setMessages = (messages) => {
-    if (messages) this.setState({messages})
+    if (messages) this.setState({ messages })
   }
 
 

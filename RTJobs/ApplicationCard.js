@@ -118,7 +118,8 @@ class ApplicationCard extends React.Component {
       title,
       vacancies,
       applications,
-      messages
+      messages,
+      reloadFunc
     } = this.props;
     return (
       <ScrollView>
@@ -201,7 +202,8 @@ class ApplicationCard extends React.Component {
                     created_by,
                     token,
                     applications,
-                    messages
+                    messages,
+                    reloadFunc
                   })
                 }
               >

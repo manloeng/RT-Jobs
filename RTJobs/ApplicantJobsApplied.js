@@ -90,6 +90,7 @@ class ApplicantJobsApplied extends React.Component {
                 key={application.app_id}
                 navigation={this.props.navigation}
                 updateApplications={this.updateApplications}
+                reloadFunc={this.fetchApplications}
               ></ApplicationCard>
             );
           })}
