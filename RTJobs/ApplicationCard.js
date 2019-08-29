@@ -206,20 +206,6 @@ class ApplicationCard extends React.Component {
                 <Text style={styles.text}>Contact</Text>
               </TouchableOpacity>
             )}
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() =>
-                navigate("Chat", {
-                  display_name,
-                  created_by,
-                  token,
-                  applications,
-                  messages
-                })
-              }
-            >
-              <Text style={styles.text}>Contact</Text>
-            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>

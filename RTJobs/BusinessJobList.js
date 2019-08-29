@@ -15,7 +15,7 @@ class BusinessJobList extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
     return {
-      headerTitle: "My jobs",
+      headerTitle: "My Jobs",
       headerRight: (
         <TouchableOpacity
           onPress={() => params.handleThis()}

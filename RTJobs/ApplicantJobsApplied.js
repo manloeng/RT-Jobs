@@ -5,7 +5,8 @@ import {
   View,
   TouchableOpacity,
   StyleSheet,
-  ScrollView
+  ScrollView,
+  ActivityIndicator
 } from "react-native";
 import { TextInput, FlatList } from "react-native-gesture-handler";
 import * as api from "./api";
@@ -70,8 +71,8 @@ class ApplicantJobsApplied extends React.Component {
     const { localId } = this.props.navigation.state.params;
     if (isLoading)
       return (
-        <View>
-          <Text>Loading...</Text>
+        <View style={{ padding: 20 }}>
+          <ActivityIndicator size="large" color="#303838"></ActivityIndicator>
         </View>
       );
     return (
