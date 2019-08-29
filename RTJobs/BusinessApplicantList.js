@@ -187,6 +187,21 @@ class BusinessApplicantList extends React.Component {
                       <Text style={styles.buttonText}>Contact</Text>
                     </TouchableOpacity>
                   )}
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.props.navigation.navigate("Chat", {
+                        display_name: applicant.display_name,
+                        created_by: applicant.created_by,
+                        applications: applicant.applications,
+                        messages: applicant.messages,
+                        business: true,
+                        token: applicant.token
+                      });
+                    }}
+                    style={[styles.button, { backgroundColor: "#af96ca" }]}
+                  >
+                    <Text style={styles.buttonText}>Contact</Text>
+                  </TouchableOpacity>
                 </View>
                 <View
                   style={{
