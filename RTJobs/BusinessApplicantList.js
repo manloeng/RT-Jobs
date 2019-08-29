@@ -1,13 +1,13 @@
 import React from "react";
 import Star from "react-native-star-view";
-
 import {
   StyleSheet,
   Text,
   Button,
   View,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from "react-native";
 import * as api from "./api";
 
@@ -110,8 +110,8 @@ class BusinessApplicantList extends React.Component {
     const { applicants, isLoading } = this.state;
     if (isLoading)
       return (
-        <View>
-          <Text>Loading...</Text>
+        <View style={{ padding: 20 }}>
+          <ActivityIndicator size="large" color="#303838"></ActivityIndicator>
         </View>
       );
     return (
