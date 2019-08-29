@@ -178,8 +178,11 @@ class BusinessApplicantList extends React.Component {
                         this.props.navigation.navigate("Chat", {
                           display_name: applicant.display_name,
                           created_by: applicant.created_by,
+                          applications: applicant.applications,
+                          messages: applicant.messages,
                           business: true,
-                          token: applicant.token
+                          token: applicant.token,
+                          reloadFunc: this.reloadApplications
                         });
                       }}
                       style={[styles.button, { backgroundColor: "#af96ca" }]}
@@ -187,22 +190,6 @@ class BusinessApplicantList extends React.Component {
                       <Text style={styles.buttonText}>Contact</Text>
                     </TouchableOpacity>
                   )}
-                  <TouchableOpacity
-                    onPress={() => {
-                      this.props.navigation.navigate("Chat", {
-                        display_name: applicant.display_name,
-                        created_by: applicant.created_by,
-                        applications: applicant.applications,
-                        messages: applicant.messages,
-                        business: true,
-                        token: applicant.token,
-                        reloadFunc: this.reloadApplications
-                      });
-                    }}
-                    style={[styles.button, { backgroundColor: "#af96ca" }]}
-                  >
-                    <Text style={styles.buttonText}>Contact</Text>
-                  </TouchableOpacity>
                 </View>
                 <View
                   style={{
@@ -299,7 +286,7 @@ class BusinessApplicantList extends React.Component {
     api.getApplicantsByJobId(job_id).then(applicants => {
       this.setState({ applicants });
     });
-  }
+  };
 
   updateApplications = ({ app_id, confirmation }) => {
     this.setState(currentState => {

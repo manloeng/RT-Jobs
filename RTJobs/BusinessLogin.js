@@ -6,8 +6,7 @@ import {
   View,
   ScrollView,
   Image,
-  TouchableOpacity,
-  Picker
+  TouchableOpacity
 } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import * as api from "./api";
@@ -50,19 +49,6 @@ const styles = StyleSheet.create({
     color: "#303838",
     fontWeight: "bold",
     fontSize: 20
-  },
-  dropdown: {
-    backgroundColor: "#F5F5EF",
-    borderRadius: 40,
-    borderColor: "#303838",
-    borderWidth: 1,
-    width: 200,
-    margin: 5,
-    color: "#303838",
-    fontSize: 15,
-    textAlign: "center",
-    alignItems: "center",
-    justifyContent: "center"
   }
 });
 
@@ -109,14 +95,7 @@ class BusinessLogin extends React.Component {
             secureTextEntry={true}
             password={true}
           />
-          <View style={styles.dropdown}>
-            <Picker
-              style={{ width: 150, height: 50 }}
-              selectedValue={"Manchester"}
-            >
-              <Picker.Item label="Manchester" value="Manchester" />
-            </Picker>
-          </View>
+
           <View style={{ margin: 7 }} />
           <TouchableOpacity
             style={styles.button}
