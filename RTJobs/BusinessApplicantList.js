@@ -185,7 +185,7 @@ class BusinessApplicantList extends React.Component {
                           reloadFunc: this.reloadApplications
                         });
                       }}
-                      style={[styles.button, { backgroundColor: "#af96ca" }]}
+                      style={[styles.button, { backgroundColor: "#047B84" }]}
                     >
                       <Text style={styles.buttonText}>Contact</Text>
                     </TouchableOpacity>
@@ -255,15 +255,17 @@ class BusinessApplicantList extends React.Component {
                     )}
                   </TouchableOpacity>
                 </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-around"
-                  }}
-                >
-                  <Text style={styles.detailText}>Interview Score: </Text>
-                  <Star score={applicant.score} />
-                </View>
+                {applicant.score > 0 && (
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-around"
+                    }}
+                  >
+                    <Text style={styles.detailText}>Interview Score: </Text>
+                    <Star score={applicant.score} />
+                  </View>
+                )}
               </View>
             );
           })}
