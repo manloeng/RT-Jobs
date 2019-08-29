@@ -80,6 +80,11 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "#303838",
     padding: 2
+  },
+  buttonTextWhite: {
+    color: "#F5F5EF",
+    fontWeight: "bold",
+    fontSize: 15
   }
 });
 
@@ -187,7 +192,7 @@ class BusinessApplicantList extends React.Component {
                       }}
                       style={[styles.button, { backgroundColor: "#047B84" }]}
                     >
-                      <Text style={styles.buttonText}>Contact</Text>
+                      <Text style={styles.buttonTextWhite}>Contact</Text>
                     </TouchableOpacity>
                   )}
                 </View>
