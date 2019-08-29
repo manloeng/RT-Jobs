@@ -4,6 +4,7 @@ import {
   Text,
   Button,
   View,
+  Image,
   ScrollView,
   TouchableOpacity
 } from "react-native";
@@ -72,6 +73,10 @@ class ApplicantLogin extends React.Component {
           backgroundColor: "#047B84"
         }}
       >
+        <Image
+          style={{ width: 150, height: 150 }}
+          source={require("./src/image/logo.png")}
+        />
         <Text style={styles.title}>Applicant Login</Text>
 
         <View>
