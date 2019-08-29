@@ -172,7 +172,7 @@ class ApplicationCard extends React.Component {
             )}
             {confirmation === "rejected" && (
               <TouchableOpacity style={styles.buttonOrange} disabled={true}>
-                <Text style={styles.textWhite}>Rejected</Text>
+                <Text style={styles.textWhite}>Unsuccessful</Text>
               </TouchableOpacity>
             )}
 
@@ -190,6 +190,20 @@ class ApplicationCard extends React.Component {
                 }}
               >
                 <Text style={styles.textWhite}>Accept?</Text>
+              </TouchableOpacity>
+            )}
+            {confirmation !== "rejected" && (
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() =>
+                  navigate("Chat", {
+                    display_name,
+                    created_by,
+                    token
+                  })
+                }
+              >
+                <Text style={styles.text}>Contact</Text>
               </TouchableOpacity>
             )}
             <TouchableOpacity

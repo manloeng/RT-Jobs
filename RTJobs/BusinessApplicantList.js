@@ -1,4 +1,6 @@
 import React from "react";
+import Star from "react-native-star-view";
+
 import {
   StyleSheet,
   Text,
@@ -87,7 +89,8 @@ class BusinessApplicantList extends React.Component {
   };
   state = {
     job: {},
-    applicants: []
+    applicants: [],
+    isLoading: true
   };
 
   render() {
@@ -104,7 +107,13 @@ class BusinessApplicantList extends React.Component {
       title,
       vacancies
     } = this.state.job;
-    const { applicants } = this.state;
+    const { applicants, isLoading } = this.state;
+    if (isLoading)
+      return (
+        <View>
+          <Text>Loading...</Text>
+        </View>
+      );
     return (
       <ScrollView contentContainerStyle={styles.container}>
         <View>
@@ -143,9 +152,11 @@ class BusinessApplicantList extends React.Component {
           </View>
           <Text style={[styles.title, { marginLeft: 40 }]}>Applications</Text>
           {applicants.map(applicant => {
-            console.log(applicant, "here");
             return (
-              <View style={styles.applcaitionContainer}>
+              <View
+                style={styles.applcaitionContainer}
+                key={applicant.applications}
+              >
                 <View
                   style={{
                     flexDirection: "row",
@@ -161,6 +172,21 @@ class BusinessApplicantList extends React.Component {
                   >
                     <Text style={styles.text}>{applicant.display_name}</Text>
                   </View>
+                  {applicant.confirmation !== "rejected" && (
+                    <TouchableOpacity
+                      onPress={() => {
+                        this.props.navigation.navigate("Chat", {
+                          display_name: applicant.display_name,
+                          created_by: applicant.created_by,
+                          business: true,
+                          token: applicant.token
+                        });
+                      }}
+                      style={[styles.button, { backgroundColor: "#af96ca" }]}
+                    >
+                      <Text style={styles.buttonText}>Contact</Text>
+                    </TouchableOpacity>
+                  )}
                   <TouchableOpacity
                     onPress={() => {
                       this.props.navigation.navigate("Chat", {
@@ -183,25 +209,72 @@ class BusinessApplicantList extends React.Component {
                     justifyContent: "space-between"
                   }}
                 >
-                  <TouchableOpacity
-                    style={[styles.button, { backgroundColor: "#D2F2A6" }]}
-                    onPress={() => {
-                      api.postBusinessApproval(applicant.applications, "offer");
-                    }}
-                  >
-                    <Text style={styles.buttonText}>Confirm</Text>
-                  </TouchableOpacity>
+                  {applicant.confirmation === "null" && (
+                    <TouchableOpacity
+                      style={[styles.button, { backgroundColor: "#D2F2A6" }]}
+                      onPress={() => {
+                        this.updateApplications({
+                          app_id: applicant.applications,
+                          confirmation: "offer"
+                        });
+                        api.postBusinessApproval(
+                          applicant.applications,
+                          "offer"
+                        );
+                      }}
+                    >
+                      <Text style={styles.buttonText}>Offer Job</Text>
+                    </TouchableOpacity>
+                  )}
+
+                  {applicant.confirmation === "offer" && (
+                    <TouchableOpacity
+                      style={[styles.button, { backgroundColor: "#D7D9D9" }]}
+                    >
+                      <Text style={styles.buttonText} disabled={true}>
+                        Pending
+                      </Text>
+                    </TouchableOpacity>
+                  )}
+
+                  {applicant.confirmation === "accepted" && (
+                    <TouchableOpacity
+                      style={[styles.button, { backgroundColor: "#8FC85B" }]}
+                    >
+                      <Text style={styles.buttonText} disabled={true}>
+                        Confirmed
+                      </Text>
+                    </TouchableOpacity>
+                  )}
+
                   <TouchableOpacity
                     style={[styles.button, { backgroundColor: "#F5A758" }]}
                     onPress={() => {
+                      this.updateApplications({
+                        app_id: applicant.applications,
+                        confirmation: "rejected"
+                      });
                       api.postBusinessApproval(
                         applicant.applications,
                         "rejected"
                       );
                     }}
                   >
-                    <Text style={styles.buttonText}>Reject</Text>
+                    {applicant.confirmation === "rejected" ? (
+                      <Text style={styles.buttonText}>Unsuccessful</Text>
+                    ) : (
+                      <Text style={styles.buttonText}>Decline</Text>
+                    )}
                   </TouchableOpacity>
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-around"
+                  }}
+                >
+                  <Text style={styles.detailText}>Interview Score: </Text>
+                  <Star score={applicant.score} />
                 </View>
               </View>
             );
@@ -213,11 +286,23 @@ class BusinessApplicantList extends React.Component {
   componentDidMount() {
     const { job_id } = this.props.navigation.state.params;
     api.getJobByJobId(job_id).then(job => {
-      this.setState({ job });
+      this.setState({ job, isLoading: false });
     });
     api.getApplicantsByJobId(job_id).then(applicants => {
       this.setState({ applicants });
     });
   }
+
+  updateApplications = ({ app_id, confirmation }) => {
+    this.setState(currentState => {
+      applicants = currentState.applicants.map(application => {
+        if (application.applications === app_id) {
+          application.confirmation = confirmation;
+          return application;
+        } else return application;
+      });
+      return applicants;
+    });
+  };
 }
 export default BusinessApplicantList;
