@@ -166,6 +166,8 @@ class BusinessApplicantList extends React.Component {
                       this.props.navigation.navigate("Chat", {
                         display_name: applicant.display_name,
                         created_by: applicant.created_by,
+                        applications: applicant.applications,
+                        messages: applicant.messages,
                         business: true,
                         token: applicant.token
                       });

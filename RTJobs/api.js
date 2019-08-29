@@ -126,3 +126,19 @@ export const patchApplication = async (applications, confirmation) => {
   } = await request.patch(patchApplicationsLink, { confirmation });
   return application;
 };
+
+export const patchApplicationScore = async (applications, score) => {
+  const patchApplicationsLink = `applications/${applications}`;
+  const {
+    data: { application }
+  } = await request.patch(patchApplicationsLink, { score });
+  return application;
+};
+
+export const patchApplicationMessages = async (applications, messages) => {
+  const patchApplicationsLink = `applications/${applications}`;
+  const {
+    data: { application }
+  } = await request.patch(patchApplicationsLink, { messages });
+  return application;
+};

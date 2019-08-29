@@ -116,7 +116,9 @@ class ApplicationCard extends React.Component {
       pay,
       start_time,
       title,
-      vacancies
+      vacancies,
+      applications,
+      messages
     } = this.props;
     return (
       <ScrollView>
@@ -168,7 +170,6 @@ class ApplicationCard extends React.Component {
                 <Text style={styles.textWhite}>Pending</Text>
               </TouchableOpacity>
             )}
-
             {confirmation === "rejected" && (
               <TouchableOpacity style={styles.buttonOrange} disabled={true}>
                 <Text style={styles.textWhite}>Rejected</Text>
@@ -197,7 +198,9 @@ class ApplicationCard extends React.Component {
                 navigate("Chat", {
                   display_name,
                   created_by,
-                  token
+                  token,
+                  applications,
+                  messages
                 })
               }
             >
