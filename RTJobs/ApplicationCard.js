@@ -47,7 +47,8 @@ class ApplicationCard extends React.Component {
       start_time,
       title,
       vacancies,
-      applications
+      applications,
+      messages
     } = this.props;
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -97,7 +98,8 @@ class ApplicationCard extends React.Component {
               display_name,
               created_by,
               token,
-              applications
+              applications,
+              messages
             })
           }
         >

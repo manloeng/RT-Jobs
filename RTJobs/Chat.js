@@ -4,6 +4,7 @@ import { OTSession, OTPublisher, OTSubscriber } from 'opentok-react-native';
 import { GiftedChat, Bubble } from 'react-native-gifted-chat'
 import apiKey from './opentokConfig';
 import Questions from './Questions';
+import * as api from './api';
 
 const OTSessionId = "2_MX40NjQwOTQzMn5-MTU2NjgxMDkwNzk3NH42Q2RqWm9BL3hNSHoxOG1Ma1hMeC9rWlB-UH4";
 
@@ -53,8 +54,9 @@ class Chat extends Component {
   }
 
   componentDidMount() {
-    const { business, created_by, display_name } = this.props.navigation.state.params;
+    const { business, created_by, display_name, messages } = this.props.navigation.state.params;
     this.getToken(OTSessionId);
+    this.setMessages(messages);
     this.props.navigation.setParams({
       handleThis: this.changeChat,
       headTitle: business ? display_name : created_by,
@@ -68,6 +70,15 @@ class Chat extends Component {
         buttonText: this.state.video ? 'Chat' : 'Interview'
       });
     }
+    if(prevState.messages.length !== this.state.messages.length) {
+      const { applications } = this.props.navigation.state.params;
+      api.patchApplicationMessages(applications, this.state.messages).catch(err => {console.log(err)});
+    }
+  }
+
+  setMessages = (messages) => {
+    console.log(messages)
+    if (messages) this.setState({messages})
   }
 
   sendSignal(messages) {

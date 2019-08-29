@@ -45,7 +45,7 @@ export default class Rater extends Component {
       return { skills: currState.skills };
     }, () => {
       const averageScore = this.state.skills.reduce((acc, cur) => acc += cur.rating / 3, 0).toFixed(2);
-      api.patchApplicationScore(this.props.id, averageScore).then((stuff)=> {console.log(stuff)}).catch(err => {console.log(err)});
+      api.patchApplicationScore(this.props.id, averageScore).catch(err => {console.log(err)});
     })
   }
 

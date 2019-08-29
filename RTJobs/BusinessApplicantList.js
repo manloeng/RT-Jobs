@@ -69,6 +69,7 @@ class BusinessApplicantList extends React.Component {
                   created_by: applicant.created_by,
                   token: applicant.token,
                   applications: applicant.applications,
+                  messages: applicant.messages,
                   business: true
                 })
               }}>
