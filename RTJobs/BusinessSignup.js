@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, Button, View, ScrollView } from "react-native";
+import { StyleSheet, Text, Button, View, Image } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import * as api from "./api";
 
@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
     margin: 5,
     color: "#303838",
     fontWeight: "bold",
-    fontSize: 15
+    fontSize: 15,
+    textAlign: "center"
   },
   text: {
     color: "#303838",
@@ -62,6 +63,10 @@ class BusinessSignup extends React.Component {
           backgroundColor: "#047B84"
         }}
       >
+        <Image
+          style={{ width: 150, height: 150 }}
+          source={require("./src/image/logo.png")}
+        />
         <Text style={styles.title}>Business Sign Up</Text>
         <View>
           <TextInput

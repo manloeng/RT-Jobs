@@ -23,20 +23,45 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: "center",
-    backgroundColor: "#006767",
+    backgroundColor: "#F5F5EF",
+    color: "#047B84",
     padding: 10,
-    borderRadius: 5
+    borderRadius: 40,
+    borderColor: "#303838",
+    borderWidth: 1,
+    margin: 4
   },
   text: {
-    color: "white"
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#303838"
   }
 });
 
 class ApplicantJobsApplied extends React.Component {
   state = { applications: null, isLoading: true };
 
-  static navigationOptions = {
-    title: "Jobs Applied"
+  static navigationOptions = ({ navigation }) => {
+    const { params = {} } = navigation.state;
+    return {
+      title: "Applied Jobs",
+      headerRight: (
+        <TouchableOpacity
+          onPress={() => params.handleThis()}
+          style={{
+            marginRight: 10,
+            padding: 10,
+            borderColor: "#047b84",
+            borderWidth: 2,
+            borderRadius: 40
+          }}
+        >
+          <Text style={{ fontWeight: "bold", fontSize: 15, color: "#111111" }}>
+            Jobs
+          </Text>
+        </TouchableOpacity>
+      )
+    };
   };
 
   render() {
@@ -51,27 +76,12 @@ class ApplicantJobsApplied extends React.Component {
         </View>
       );
     return (
-      <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() =>
-            navigate("ApplicantAvailableJobs", {
-              name: "ApplicantAvailableJobs"
-            })
-          }
-        >
-          <Text style={styles.text}>Jobs</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() =>
-            navigate("ApplicantJobsApplied", {
-              name: "ApplicantJobsApplied"
-            })
-          }
-        >
-          <Text style={styles.text}>Applied</Text>
-        </TouchableOpacity>
+      <View
+        style={{
+          flex: 2,
+          backgroundColor: "#047B84"
+        }}
+      >
         <ScrollView>
           {applications.map(application => {
             return (
@@ -90,7 +100,18 @@ class ApplicantJobsApplied extends React.Component {
 
   componentDidMount() {
     this.fetchApplications();
+
+    this.props.navigation.setParams({
+      handleThis: this.changeNavigate
+    });
   }
+
+  changeNavigate = () => {
+    const { localId } = this.props.navigation.state.params;
+    this.props.navigation.navigate("ApplicantAvailableJobs", {
+      localId
+    });
+  };
 
   fetchApplications = () => {
     const { localId } = this.props.navigation.state.params;

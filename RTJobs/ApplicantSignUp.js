@@ -4,7 +4,7 @@ import {
   Text,
   Button,
   View,
-  ScrollView,
+  Image,
   TouchableOpacity
 } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
     margin: 5,
     color: "#303838",
     fontWeight: "bold",
-    fontSize: 15
+    fontSize: 15,
+    textAlign: "center"
   },
   text: {
     color: "#303838",
@@ -69,6 +70,10 @@ class ApplicantSignup extends React.Component {
           backgroundColor: "#047B84"
         }}
       >
+        <Image
+          style={{ width: 150, height: 150 }}
+          source={require("./src/image/logo.png")}
+        />
         <Text style={styles.title}>Applicant Sign Up</Text>
         <View>
           <TextInput
