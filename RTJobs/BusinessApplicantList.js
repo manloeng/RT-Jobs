@@ -106,7 +106,6 @@ class BusinessApplicantList extends React.Component {
       vacancies
     } = this.state.job;
     const { applicants, isLoading } = this.state;
-    console.log(this.state, "this state");
     if (isLoading)
       return (
         <View>
@@ -232,13 +231,21 @@ class BusinessApplicantList extends React.Component {
                   <TouchableOpacity
                     style={[styles.button, { backgroundColor: "#F5A758" }]}
                     onPress={() => {
+                      this.updateApplications({
+                        app_id: applicant.applications,
+                        confirmation: "rejected"
+                      });
                       api.postBusinessApproval(
                         applicant.applications,
                         "rejected"
                       );
                     }}
                   >
-                    <Text style={styles.buttonText}>Reject</Text>
+                    {applicant.confirmation === "rejected" ? (
+                      <Text style={styles.buttonText}>Rejected</Text>
+                    ) : (
+                      <Text style={styles.buttonText}>Reject</Text>
+                    )}
                   </TouchableOpacity>
                 </View>
               </View>
@@ -261,14 +268,11 @@ class BusinessApplicantList extends React.Component {
   updateApplications = ({ app_id, confirmation }) => {
     this.setState(currentState => {
       applicants = currentState.applicants.map(application => {
-        console.log(application.applications, "app applications");
-        console.log(app_id, "app ID");
         if (application.applications === app_id) {
           application.confirmation = confirmation;
           return application;
         } else return application;
       });
-      console.log(applicants, "APPLICANTS");
       return applicants;
     });
   };
