@@ -170,19 +170,21 @@ class BusinessApplicantList extends React.Component {
                   >
                     <Text style={styles.text}>{applicant.display_name}</Text>
                   </View>
-                  <TouchableOpacity
-                    onPress={() => {
-                      this.props.navigation.navigate("Chat", {
-                        display_name: applicant.display_name,
-                        created_by: applicant.created_by,
-                        business: true,
-                        token: applicant.token
-                      });
-                    }}
-                    style={[styles.button, { backgroundColor: "#af96ca" }]}
-                  >
-                    <Text style={styles.buttonText}>Contact</Text>
-                  </TouchableOpacity>
+                  {applicant.confirmation !== "rejected" && (
+                    <TouchableOpacity
+                      onPress={() => {
+                        this.props.navigation.navigate("Chat", {
+                          display_name: applicant.display_name,
+                          created_by: applicant.created_by,
+                          business: true,
+                          token: applicant.token
+                        });
+                      }}
+                      style={[styles.button, { backgroundColor: "#af96ca" }]}
+                    >
+                      <Text style={styles.buttonText}>Contact</Text>
+                    </TouchableOpacity>
+                  )}
                 </View>
                 <View
                   style={{
@@ -242,9 +244,9 @@ class BusinessApplicantList extends React.Component {
                     }}
                   >
                     {applicant.confirmation === "rejected" ? (
-                      <Text style={styles.buttonText}>Rejected</Text>
+                      <Text style={styles.buttonText}>Unsuccessful</Text>
                     ) : (
-                      <Text style={styles.buttonText}>Reject</Text>
+                      <Text style={styles.buttonText}>Decline</Text>
                     )}
                   </TouchableOpacity>
                 </View>
