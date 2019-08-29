@@ -76,6 +76,11 @@ class Chat extends Component {
     }
   }
 
+  componentWillUnmount() {
+    const { reloadFunc } = this.props.navigation.state.params;
+    reloadFunc();
+  }
+
   setMessages = (messages) => {
     console.log(messages)
     if (messages) this.setState({messages})
@@ -155,6 +160,7 @@ class Chat extends Component {
             this.sendSignal(messages);
           }}
           renderBubble={this.renderBubble.bind(this)}
+          renderAvatar = {null}
           user={{
             _id: 1,
           }}

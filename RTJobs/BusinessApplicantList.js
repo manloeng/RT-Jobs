@@ -195,7 +195,8 @@ class BusinessApplicantList extends React.Component {
                         applications: applicant.applications,
                         messages: applicant.messages,
                         business: true,
-                        token: applicant.token
+                        token: applicant.token,
+                        reloadFunc: this.reloadApplications
                       });
                     }}
                     style={[styles.button, { backgroundColor: "#af96ca" }]}
@@ -288,6 +289,13 @@ class BusinessApplicantList extends React.Component {
     api.getJobByJobId(job_id).then(job => {
       this.setState({ job, isLoading: false });
     });
+    api.getApplicantsByJobId(job_id).then(applicants => {
+      this.setState({ applicants });
+    });
+  }
+
+  reloadApplications = () => {
+    const { job_id } = this.props.navigation.state.params;
     api.getApplicantsByJobId(job_id).then(applicants => {
       this.setState({ applicants });
     });
