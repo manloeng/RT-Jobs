@@ -1,5 +1,12 @@
 import React from "react";
-import { StyleSheet, Text, Button, View , Image, TouchableOpacity} from "react-native";
+import {
+  StyleSheet,
+  Text,
+  Button,
+  View,
+  Image,
+  TouchableOpacity
+} from "react-native";
 
 const styles = StyleSheet.create({
   baseText: {
@@ -7,16 +14,16 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 50,
-    color: 'white',
+    color: "white",
     fontWeight: "bold",
     alignItems: "center",
     margin: 10
   },
-    container: {
+  container: {
     flex: 1,
-    alignItems: "center", 
+    alignItems: "center",
     justifyContent: "center",
-    backgroundColor: '#047884'
+    backgroundColor: "#047B84"
   },
   button: {
     backgroundColor: "#F5F5EF",
@@ -28,12 +35,12 @@ const styles = StyleSheet.create({
     margin: 4,
     width: 200,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   text: {
     color: "#303838",
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: 20
   }
 });
 
@@ -46,19 +53,21 @@ class Homepage extends React.Component {
     return (
       <View style={styles.container}>
         <Image
-          style={{width: 200, height: 200}}
-          source={require('./src/image/logo.png')}
+          style={{ width: 200, height: 200 }}
+          source={require("./src/image/logo.png")}
         />
         <Text style={styles.title}>RT Jobs</Text>
         <View style={[styles.button]}>
-          <TouchableOpacity onPress={() => navigate("BusinessLogin", { name: "Business" })}>
-            <Text style={styles.text}>
-              Business
-            </Text>
+          <TouchableOpacity
+            onPress={() => navigate("BusinessLogin", { name: "Business" })}
+          >
+            <Text style={styles.text}>Business</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.button}>
-          <TouchableOpacity onPress={() => navigate("ApplicantLogin", { name: "Applicant" })}>
+          <TouchableOpacity
+            onPress={() => navigate("ApplicantLogin", { name: "Applicant" })}
+          >
             <Text style={styles.text}>Applicant</Text>
           </TouchableOpacity>
         </View>
