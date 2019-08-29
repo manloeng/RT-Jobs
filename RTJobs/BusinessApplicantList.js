@@ -87,7 +87,8 @@ class BusinessApplicantList extends React.Component {
   };
   state = {
     job: {},
-    applicants: []
+    applicants: [],
+    isLoading: true
   };
 
   render() {
@@ -104,7 +105,14 @@ class BusinessApplicantList extends React.Component {
       title,
       vacancies
     } = this.state.job;
-    const { applicants } = this.state;
+    const { applicants, isLoading } = this.state;
+    console.log(this.state, "this state");
+    if (isLoading)
+      return (
+        <View>
+          <Text>Loading...</Text>
+        </View>
+      );
     return (
       <ScrollView contentContainerStyle={styles.container}>
         <View>
@@ -143,9 +151,11 @@ class BusinessApplicantList extends React.Component {
           </View>
           <Text style={[styles.title, { marginLeft: 40 }]}>Applications</Text>
           {applicants.map(applicant => {
-            console.log(applicant, "here");
             return (
-              <View style={styles.applcaitionContainer}>
+              <View
+                style={styles.applcaitionContainer}
+                key={applicant.applications}
+              >
                 <View
                   style={{
                     flexDirection: "row",
@@ -181,14 +191,44 @@ class BusinessApplicantList extends React.Component {
                     justifyContent: "space-between"
                   }}
                 >
-                  <TouchableOpacity
-                    style={[styles.button, { backgroundColor: "#D2F2A6" }]}
-                    onPress={() => {
-                      api.postBusinessApproval(applicant.applications, "offer");
-                    }}
-                  >
-                    <Text style={styles.buttonText}>Confirm</Text>
-                  </TouchableOpacity>
+                  {applicant.confirmation === "null" && (
+                    <TouchableOpacity
+                      style={[styles.button, { backgroundColor: "#D2F2A6" }]}
+                      onPress={() => {
+                        this.updateApplications({
+                          app_id: applicant.applications,
+                          confirmation: "offer"
+                        });
+                        api.postBusinessApproval(
+                          applicant.applications,
+                          "offer"
+                        );
+                      }}
+                    >
+                      <Text style={styles.buttonText}>Offer Job</Text>
+                    </TouchableOpacity>
+                  )}
+
+                  {applicant.confirmation === "offer" && (
+                    <TouchableOpacity
+                      style={[styles.button, { backgroundColor: "#D7D9D9" }]}
+                    >
+                      <Text style={styles.buttonText} disabled={true}>
+                        Pending
+                      </Text>
+                    </TouchableOpacity>
+                  )}
+
+                  {applicant.confirmation === "accepted" && (
+                    <TouchableOpacity
+                      style={[styles.button, { backgroundColor: "#8FC85B" }]}
+                    >
+                      <Text style={styles.buttonText} disabled={true}>
+                        Confirmed
+                      </Text>
+                    </TouchableOpacity>
+                  )}
+
                   <TouchableOpacity
                     style={[styles.button, { backgroundColor: "#F5A758" }]}
                     onPress={() => {
@@ -211,11 +251,26 @@ class BusinessApplicantList extends React.Component {
   componentDidMount() {
     const { job_id } = this.props.navigation.state.params;
     api.getJobByJobId(job_id).then(job => {
-      this.setState({ job });
+      this.setState({ job, isLoading: false });
     });
     api.getApplicantsByJobId(job_id).then(applicants => {
       this.setState({ applicants });
     });
   }
+
+  updateApplications = ({ app_id, confirmation }) => {
+    this.setState(currentState => {
+      applicants = currentState.applicants.map(application => {
+        console.log(application.applications, "app applications");
+        console.log(app_id, "app ID");
+        if (application.applications === app_id) {
+          application.confirmation = confirmation;
+          return application;
+        } else return application;
+      });
+      console.log(applicants, "APPLICANTS");
+      return applicants;
+    });
+  };
 }
 export default BusinessApplicantList;

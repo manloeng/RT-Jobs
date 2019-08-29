@@ -67,7 +67,6 @@ class ApplicantJobsApplied extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     const { applications, isLoading } = this.state;
-    console.log(applications, "applications");
     const { localId } = this.props.navigation.state.params;
     if (isLoading)
       return (
