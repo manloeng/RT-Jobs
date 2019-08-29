@@ -1,4 +1,6 @@
 import React from "react";
+import Star from "react-native-star-view";
+
 import {
   StyleSheet,
   Text,
@@ -249,6 +251,15 @@ class BusinessApplicantList extends React.Component {
                       <Text style={styles.buttonText}>Decline</Text>
                     )}
                   </TouchableOpacity>
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-around"
+                  }}
+                >
+                  <Text style={styles.detailText}>Interview Score: </Text>
+                  <Star score={applicant.score} />
                 </View>
               </View>
             );
