@@ -199,7 +199,9 @@ class ApplicationCard extends React.Component {
                   navigate("Chat", {
                     display_name,
                     created_by,
-                    token
+                    token,
+                    applications,
+                    messages
                   })
                 }
               >

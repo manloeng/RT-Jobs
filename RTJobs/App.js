@@ -10,6 +10,7 @@ import ApplicantAvailableJobs from "./ApplicantAvailableJobs";
 import ApplicantJobsApplied from "./ApplicantJobsApplied";
 import BusinessApplicantList from "./BusinessApplicantList";
 import Chat from "./Chat";
+console.disableYellowBox = true;
 
 const MainNavigator = createStackNavigator({
   Home: { screen: Homepage },
