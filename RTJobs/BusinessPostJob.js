@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
     color: "#303838",
     fontWeight: "bold",
     fontSize: 15,
-    width: 300
+    width: 300,
+    textAlign: "center"
   },
   button: {
     alignItems: "center",
@@ -57,7 +58,8 @@ class BusinessPostJob extends React.Component {
     location: "",
     pay: "",
     start_time: "",
-    duration: ""
+    duration: "",
+    questions: ""
   };
   render() {
     return (
@@ -120,6 +122,23 @@ class BusinessPostJob extends React.Component {
             }}
             placeholder="Shift length"
           />
+          <Text style={styles.text}>Interview Questions: </Text>
+          <TextInput
+            value={this.state.questions}
+            style={styles.textarea}
+            onChange={e => {
+              this.onChangeText(e, "questions");
+            }}
+            placeholder="Type question"
+          />
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              this.setState({ questions: "" });
+            }}
+          >
+            <Text style={styles.textpost}>Add Question</Text>
+          </TouchableOpacity>
           <Text style={styles.text}>Description: </Text>
           <TextInput
             style={[styles.textarea, { height: 100 }]}
