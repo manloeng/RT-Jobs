@@ -77,12 +77,11 @@ class Chat extends Component {
   }
 
   componentWillUnmount() {
-    const { reloadFunc } = this.props.navigation.state.params;
-    reloadFunc();
+    const { reloadFunc = null } = this.props.navigation.state.params;
+    if (reloadFunc) reloadFunc();
   }
 
   setMessages = (messages) => {
-    console.log(messages)
     if (messages) this.setState({messages})
   }
 
